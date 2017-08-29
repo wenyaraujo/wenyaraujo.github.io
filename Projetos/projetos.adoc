@@ -1,0 +1,31 @@
+:toc: left
+= Projetos
+Powered by Weny Vasconcelos - wenymaysa.va@gmail.com (C)2017
+
+Seja bem vindo(a)! Aqui você pode encontrar todos os projetos desenvolvidos e em desenvolvimento por mim na disciplina de *Processamento Digital de Imagens*, promovida pelo Departamento de Computação e Automação, Centro de Tecnologia, Universidade Federal do Rio Grande do Norte.
+
+
+== 1ª Atividade: link:negativo/negativo.html[Negativo de uma imagem].
+
+== 2ª Atividade: Contando Bolhas.
+
+
+
+What's up, *guys*!
+
+=== Here is a local to write equations in LaTeX.
+
+I don't know _anything_.
+
+== Shake it all, man!
+
+`starting new life`
+
+
+=== Learn about small things and you will be a good professional
+
+Sometimes we can subestimate some #knowledges# but we shouldn't do [.underline]#that#.
+
+ 
+[.lead]
+This text will be styled as a lead paragraph (i.e., larger font).

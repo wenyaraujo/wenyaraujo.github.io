@@ -1,0 +1,29 @@
+
+= 1ª Atividade: Negativo de uma imagem.
+
+A fim de iniciar os trabalhos por meio de uma tarefa simples, porém bastante esclarecedora, vemos nesta atividade o funcionamento de um dos filtros mais comuns na indústria de manipulação de imagem: o negativo.
+
+ 
+
+
+
+== Here is a local to write equations in LaTeX.
+
+
+What's up, *guys*!
+
+
+I don't know _anything_.
+
+== Shake it all, man!
+
+`starting new life`
+
+
+=== Learn about small things and you will be a good professional
+
+Sometimes we can subestimate some #knowledges# but we shouldn't do [.underline]#that#.
+
+ 
+[.lead]
+This text will be styled as a lead paragraph (i.e., larger font).
