@@ -1,7 +1,13 @@
+:toc: left
 
-== 1ª Atividade: Negativo de uma imagem.
+:source-highlighter: pygments
 
-A fim de iniciar os trabalhos por meio de uma tarefa simples, porém bastante esclarecedora, vemos nesta atividade o funcionamento de um dos filtros mais comuns na indústria de manipulação de imagem: o negativo.
+= 1ª Atividade: Negativo de uma imagem.
+
+O objetivo desta atividade é perceber como se aplica o efeito de negativo em imagens digitais por meio de software de correção de imagem, utilizando a biblioteca OpenCV.
+
+== Desenvolvimento da atividade
+
 
 
 .Isadora Renascentista
@@ -10,20 +16,10 @@ image::./neg_pb.png[320,320]
 .Isadora Renascentista (Negativo)
 image::./negativo.png[320,320]
 
+=== Código no OpenCV
 
-== Here is a local to write equations in LaTeX.
-
-I don't know _anything_.
-
-== Shake it all, man!
-
-`starting new life`
-
-
-=== Learn about small things and you will be a good professional
-
-Sometimes we can subestimate some #knowledges# but we shouldn't do [.underline]#that#.
-
- 
-[.lead]
-This text will be styled as a lead paragraph (i.e., larger font).
+.negativo.cpp
+[source,cpp,options="nowrap"]
+----
+include::regions.cpp[]
+----
