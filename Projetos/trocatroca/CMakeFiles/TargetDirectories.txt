@@ -1,0 +1,3 @@
+/home/weny/github/wenyaraujo.github.io/Projetos/trocatroca/CMakeFiles/edit_cache.dir
+/home/weny/github/wenyaraujo.github.io/Projetos/trocatroca/CMakeFiles/rebuild_cache.dir
+/home/weny/github/wenyaraujo.github.io/Projetos/trocatroca/CMakeFiles/trocaregiao.dir

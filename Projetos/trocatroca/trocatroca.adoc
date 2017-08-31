@@ -1,0 +1,31 @@
+:toc: left
+
+:source-highlighter: pygments
+
+= 2ª Atividade: Troca região
+
+O objetivo desta atividade é...
+
+== Desenvolvimento da atividade
+
+A imagem a ser processada é a seguinte:
+
+
+.Garnet and Stevonnie (Imagem original)
+image::./mindful.png[640,360]
+
+E após compilar o código, se tornou a seguinte:
+
+.Garnet and Stevonnie (Regiões Trocadas)
+image::./trocatroca.png[640,360]
+
+e o código utilizado fora:
+
+.trocaregiao.cpp
+[source,cpp,options="nowrap"]
+----
+include::trocaregiao.cpp[]
+----
+
+
+
