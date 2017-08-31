@@ -1,0 +1,3 @@
+/home/weny/github/wenyaraujo.github.io/Projetos/negativo_pontos/CMakeFiles/edit_cache.dir
+/home/weny/github/wenyaraujo.github.io/Projetos/negativo_pontos/CMakeFiles/rebuild_cache.dir
+/home/weny/github/wenyaraujo.github.io/Projetos/negativo_pontos/CMakeFiles/regions.dir

@@ -1,0 +1,4 @@
+digite o primeiro ponto (x): 100
+digite o primeiro ponto (y): 100
+digite o segundo ponto (x): 300
+digite o segundo ponto (y): 500
