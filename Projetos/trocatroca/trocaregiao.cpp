@@ -4,26 +4,26 @@
 using namespace cv;
 using namespace std;
 
-int main(int argc, char** argv){
+int main(int, char**){
   Mat image;
-  int width, height;
+  int larg, alt;
 
   image = imread("mindful.png",CV_LOAD_IMAGE_COLOR);
 	if(!image.data)
     cout << "A imagem não pôde ser carregada ou está corrompida." << endl;
   
-  width=image.size().width;
-  height=image.size().height;
+  larg=image.size().width;
+  alt=image.size().height;
 
-  Mat troca(height, width, image.type());
+  Mat troca(alt, larg, image.type());
 
-  image(Rect(0, 0, width/2, height/2)).copyTo(troca(Rect(width/2, height/2, width/2, height/2)));
+  image(Rect(0, 0, larg/2, alt/2)).copyTo(troca(Rect(larg/2, alt/2, larg/2, alt/2)));
 
-  image(Rect(0, height/2, width/2, height/2)).copyTo(troca(Rect(width/2,0, width/2, height/2)));
+  image(Rect(0, alt/2, larg/2, alt/2)).copyTo(troca(Rect(larg/2,0, larg/2, alt/2)));
 
-  image(Rect(width/2,0,width/2,height/2)).copyTo(troca(Rect(0,height/2, width/2, height/2)));
+  image(Rect(larg/2,0,larg/2,alt/2)).copyTo(troca(Rect(0,alt/2, larg/2, alt/2)));
 
-  image(Rect(width/2,height/2,width/2,height/2)).copyTo(troca(Rect(0,0, width/2, height/2)));
+  image(Rect(larg/2,alt/2,larg/2,alt/2)).copyTo(troca(Rect(0,0, larg/2, alt/2)));
 
 	imwrite("trocatroca.png", troca);
   imshow("image", troca);

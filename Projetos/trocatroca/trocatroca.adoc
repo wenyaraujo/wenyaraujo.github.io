@@ -4,22 +4,25 @@
 
 = 2ª Atividade: Troca região
 
-O objetivo desta atividade é...
+O objetivo desta atividade é observar como podemos utilizar de ferramentas computacionais da biblioteca OpenCV para modificar a imagem, cortando-a em pedaços e movendo, este pedaços - amontoados de pixels -, para outro lugar pré-destinado pelo usuário.
 
 == Desenvolvimento da atividade
 
 A imagem a ser processada é a seguinte:
 
-
 .Garnet and Stevonnie (Imagem original)
-image::./mindful.png[640,360]
+image::./mindful.png[960,540]
 
 E após compilar o código, se tornou a seguinte:
 
 .Garnet and Stevonnie (Regiões Trocadas)
-image::./trocatroca.png[640,360]
+image::./trocatroca.png[960,540]
 
-e o código utilizado fora:
+=== Código no OpenCV
+
+
+A priori, fora necessário o uso de funções do OpenCV, como o "Rect" e o "CopyTo". A ideia é simples, o programa "divide" a imagem em 4 partes e troca, dependendo da forma que o usuário deseja. Aqui, podemos perceber que trocamos da seguinte forma: quadrante superior esquerdo com o quadrante inferior direito e quadrante superior direito com o quadrante inferior esquerdo. 
+
 
 .trocaregiao.cpp
 [source,cpp,options="nowrap"]
