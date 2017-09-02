@@ -1,0 +1,41 @@
+:toc: left
+
+:source-highlighter: pygments
+
+= 3ª Atividade: Identificando Bolhas.
+
+O objetivo dessa atividade é demonstrar, em código, como seria feito caso quiséssemos encontrar objetos em imagens e, identificar quais destes contém buracos. 
+
+== Introdução
+
+:
+
+.Bolhas (Original em escala de cinza)
+image::./bolhas.png[320,320]
+
+
+== Desenvolvimento da atividade
+
+
+A imagem anterior fica assim:
+
+.Bolhas com o floodfill
+image::./flood.png[320,320]
+
+
+Após retirada das bolhas que tocam as bordas e mudança do fundo, a imagem está preparada para ser tratada, ou seja, contar quantas destas que restaram contem buracos. 
+
+.Imagem a ser tratada pelo código de identificação de buraco
+image::./ds.png[320,320]
+
+=== Código no OpenCV
+
+.bolhas.cpp
+[source,cpp,options="nowrap"]
+----
+include::bolhas.cpp[]
+----
+
+
+
+

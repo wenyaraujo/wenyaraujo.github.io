@@ -1,0 +1,3 @@
+/home/weny/github/wenyaraujo.github.io/Projetos/bolhas/CMakeFiles/edit_cache.dir
+/home/weny/github/wenyaraujo.github.io/Projetos/bolhas/CMakeFiles/rebuild_cache.dir
+/home/weny/github/wenyaraujo.github.io/Projetos/bolhas/CMakeFiles/bolhas.dir

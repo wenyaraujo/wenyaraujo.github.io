@@ -11,6 +11,10 @@ Região de imagens sendo negativadas por interação do usuário.
 
 === 2ª Atividade: link:trocatroca/trocatroca.html[Troca regiões].
 
+Trocando regiões da imagem, utilizando funções da biblioteca OpenCV.
+
+=== 3ª Atividade: link:bolhas/bolhas.html[Identificando Bolhas].
+
 
 
 
