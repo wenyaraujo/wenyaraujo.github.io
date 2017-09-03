@@ -1,4 +1,4 @@
-# WELCOME! | A personal page to promote projects.
+# Welcome! | A personal page to promote projects.
 
 
 I'm Weny Vasconcelos and this repository will be a source of programs and apps to be developed. Feel free to add and share more knowledge and suggestions. Be my guest!
