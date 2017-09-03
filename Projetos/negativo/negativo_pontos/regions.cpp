@@ -14,29 +14,32 @@ int main(int, char**){
 
 	int x1, y1, x2, y2;
 
+		cout << "O tamanho da imagem é:" << image.size().height << "/"<< image.size().width << "Escreva pontos dentro desse limite."<< endl;
+
 		do{ 
 			cout << "digite o primeiro ponto (x):" << endl;
 			cin >> x1;
 			}
-			while(x1 >=image.rows);
+			while(x1 >image.rows);
 
 		do{ 
 			cout << "digite o primeiro ponto (y):" << endl;
 			cin >> y1;
 			}
-			while(y1 >=image.cols);
+			while(y1 >image.cols);
 
 		do{ 
 			cout << "digite o segundo ponto (x):" << endl;
 			cin >> x2;
 			}
-			while(x2 >=image.rows);
+			while(x2 >image.rows);
 
 		do{ 
 			cout << "digite o segundo ponto (y):" << endl;
 			cin >> y2;
 			}
-			while(y2 >=image.cols);
+			while(y2 >image.cols);
+
 	
   for(int i=x1; i<x2; i++){
     for(int j=y1; j<y2; j++){

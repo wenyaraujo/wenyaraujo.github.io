@@ -507,7 +507,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>O objetivo dessa atividade é demonstrar, em código, como seria feito caso quiséssemos encontrar objetos em imagens e, identificar quais destes contém buracos.</p>
+<p>O objetivo dessa atividade é demonstrar, em código, como seria feito caso quiséssemos encontrar objetos em imagens e identificar quais destes contém buracos.</p>
 </div>
 </div>
 </div>
@@ -515,19 +515,31 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_introdução">Introdução</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>:</p>
+<p>Para o mundo de processamento de imagens e visão artificial, é muito comum e muito importante que haja a possibilidade de identificar que tipo de objeto e quantos objetos estão presentes em uma cena.</p>
+</div>
+<div class="paragraph">
+<p>Peguemos a imagem a seguir:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="./bolhas.png" alt="320" width="320">
 </div>
-<div class="title">Figure 1. Bolhas (Original em escala de cinza)</div>
+<div class="title">Figure 1. Bolhas (Original)</div>
+</div>
+<div class="paragraph">
+<p>De uma forma simplista e prática, diferentemente dos humanos, máquinas não conseguem processar (sem o uso de algoritmos voltados para isso) e diferenciar quais são os tipos de objetos existentes nessa imagem. Para nós pode parecer fácil saber que há uma quantidade "x" de objetos, dos quais, "y" contém furos (ou buracos) em seu interior, porém, para que uma máquina possa processar esse tipo de informação, faz-se necessário o uso de códigos e funções que faça uma varredura em busca do objetivo.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_desenvolvimento_da_atividade">Desenvolvimento da atividade</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Nesta atividade, a imagem assume apenas 2 valores de tom de cinza. O fundo com valor "0" (preto) e os objetos com valor "255" (branco). Assim, podemos rotular os objetos presentes na imagem com um valor de tom de cinza que difere cada um.</p>
+</div>
+<div class="paragraph">
+<p>O papel da função FloodFill é exatamente este. Processar os valores e atribuir um novo valor de tom de cinza ao "aglomerado de pixel" que encontrar - o objeto.</p>
+</div>
 <div class="paragraph">
 <p>A imagem anterior fica assim:</p>
 </div>
@@ -538,7 +550,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Figure 2. Bolhas com o floodfill</div>
 </div>
 <div class="paragraph">
-<p>Após retirada das bolhas que tocam as bordas e mudança do fundo, a imagem está preparada para ser tratada, ou seja, contar quantas destas que restaram contem buracos.</p>
+<p>Após retirada das bolhas que tocam as bordas e mudança do fundo, a imagem está preparada para ser tratada, ou seja, contar quantas destas que restaram contém buracos.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -655,7 +667,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-09-02 15:55:19 BRT
+Last updated 2017-09-02 17:59:22 BRT
 </div>
 </div>
 </body>

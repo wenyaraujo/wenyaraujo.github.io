@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/weny/github/wenyaraujo.github.io/Projetos/negativo_pontos/regions.cpp" "/home/weny/github/wenyaraujo.github.io/Projetos/negativo_pontos/CMakeFiles/regions.dir/regions.cpp.o"
+  "/home/weny/github/wenyaraujo.github.io/Projetos/negativo/negativo_pontos/regions.cpp" "/home/weny/github/wenyaraujo.github.io/Projetos/negativo/negativo_pontos/CMakeFiles/regions.dir/regions.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -499,7 +499,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_código_no_opencv">Código no OpenCV</a></li>
 </ul>
 </li>
-<li><a href="#_desenvolvimento_da_atividade">Desenvolvimento da atividade</a></li>
+<li><a href="#_desenvolvimento_da_atividade">Desenvolvimento da atividade</a>
+<ul class="sectlevel2">
+<li><a href="#_código_no_opencv_2">Código no OpenCV</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -507,7 +511,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>O objetivo desta atividade é perceber como se aplica o efeito de negativo em imagens digitais em softwares de correção de imagem, utilizando a biblioteca OpenCV.</p>
+<p>O objetivo desta atividade é manipular os pixels de uma imagem utilizando a biblioteca OpenCV.</p>
 </div>
 </div>
 </div>
@@ -532,7 +536,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_código_no_opencv">Código no OpenCV</h3>
 <div class="paragraph">
-<p>Para mostrar como foi possível obter o negativo da imagem por meio da biblioteca OpenCV, abaixo podemos observar o código que será explicado em breve.</p>
+<p>Para mostrar como foi possível obter o negativo da imagem por meio da biblioteca OpenCV, abaixo podemos observar o código que será melhor implementado e explicado em breve.</p>
 </div>
 <div class="listingblock">
 <div class="title">negativo.cpp</div>
@@ -584,8 +588,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="title">Figure 3. Isadora Renascentista (Região negativa)</div>
 </div>
+<div class="sect2">
+<h3 id="_código_no_opencv_2">Código no OpenCV</h3>
 <div class="paragraph">
-<p>e o código utilizado fora:</p>
+<p>O código utilizado encontra-se abaixo, bem como comentários feitos no próprio código explicando todos os passos.</p>
 </div>
 <div class="listingblock">
 <div class="title">negativo_pontos.cpp</div>
@@ -600,11 +606,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   <span class="tok-n">Mat</span> <span class="tok-n">image</span><span class="tok-p">;</span>
   <span class="tok-n">Vec3b</span> <span class="tok-n">val</span><span class="tok-p">;</span>
 
+<span class="tok-c1">//carregando a imagem</span>
+
   <span class="tok-n">image</span><span class="tok-o">=</span> <span class="tok-n">imread</span><span class="tok-p">(</span><span class="tok-s">&quot;pp.png&quot;</span><span class="tok-p">,</span><span class="tok-n">CV_LOAD_IMAGE_GRAYSCALE</span><span class="tok-p">);</span>
   <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">data</span><span class="tok-p">)</span>
     <span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;nao abriu pp.png&quot;</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">endl</span><span class="tok-p">;</span>
 
+<span class="tok-c1">//declarando variáveis para inserção dos pontos pelo usuário</span>
+
 	<span class="tok-kt">int</span> <span class="tok-n">x1</span><span class="tok-p">,</span> <span class="tok-n">y1</span><span class="tok-p">,</span> <span class="tok-n">x2</span><span class="tok-p">,</span> <span class="tok-n">y2</span><span class="tok-p">;</span>
+
+<span class="tok-c1">//atribuindo, através do &quot;Do&quot;, os pontos informados</span>
+<span class="tok-c1">//pelo usuário nas variáveis.</span>
+
+<span class="tok-c1">//o &quot;while&quot; está para que as variáveis façam uma varredura</span>
+<span class="tok-c1">//pelas linhas da matriz da imagem, caso não for um valor</span>
+<span class="tok-c1">//possível, não é possível alocar.</span>
+
+<span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;O tamanho da imagem é: &quot;</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">().</span><span class="tok-n">height</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;/&quot;</span><span class="tok-o">&lt;&lt;</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">().</span><span class="tok-n">width</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot; Escreva pontos dentro desse limite.&quot;</span><span class="tok-o">&lt;&lt;</span> <span class="tok-n">endl</span><span class="tok-p">;</span>
 
 		<span class="tok-k">do</span><span class="tok-p">{</span>
 			<span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;digite o primeiro ponto (x):&quot;</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">endl</span><span class="tok-p">;</span>
@@ -630,9 +649,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 			<span class="tok-p">}</span>
 			<span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-n">y2</span> <span class="tok-o">&gt;=</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">cols</span><span class="tok-p">);</span>
 
+<span class="tok-c1">//aqui utilizou-se um &quot;for&quot; para fazer a iteração e,</span>
+<span class="tok-c1">//do ponto inicial informado pelo usuário, até o ponto</span>
+<span class="tok-c1">//final, ele irá aplicar o negativo.</span>
+
   <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-n">x1</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-n">x2</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">){</span>
     <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-n">y1</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">&lt;</span><span class="tok-n">y2</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">){</span>
-      <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span><span class="tok-o">=</span><span class="tok-mi">255</span><span class="tok-o">-</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">);</span>
+      <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span><span class="tok-o">=</span><span class="tok-mi">255</span><span class="tok-o">-</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">);</span> <span class="tok-c1">//nesta linha</span>
+<span class="tok-c1">//ocorre a aplicação do negativo.</span>
+<span class="tok-c1">//&quot;255&quot; menos o valor do pixel alocado.</span>
     <span class="tok-p">}</span>
   <span class="tok-p">}</span>
 
@@ -643,23 +668,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span class="tok-p">}</span></code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Os pontos utilizados foram:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="pygments highlight nowrap"><code data-lang="txt"><span class="tok-err">digite</span> <span class="tok-err">o</span> <span class="tok-err">primeiro</span> <span class="tok-nb">ponto</span> <span class="tok-p">(</span><span class="tok-s">x</span><span class="tok-p">)</span><span class="tok-err">:</span> <span class="tok-err">100</span>
-<span class="tok-err">digite</span> <span class="tok-err">o</span> <span class="tok-err">primeiro</span> <span class="tok-nb">ponto</span> <span class="tok-p">(</span><span class="tok-s">y</span><span class="tok-p">)</span><span class="tok-err">:</span> <span class="tok-err">100</span>
-<span class="tok-err">digite</span> <span class="tok-err">o</span> <span class="tok-err">segundo</span> <span class="tok-nb">ponto</span> <span class="tok-p">(</span><span class="tok-s">x</span><span class="tok-p">)</span><span class="tok-err">:</span> <span class="tok-err">300</span>
-<span class="tok-err">digite</span> <span class="tok-err">o</span> <span class="tok-err">segundo</span> <span class="tok-nb">ponto</span> <span class="tok-p">(</span><span class="tok-s">y</span><span class="tok-p">)</span><span class="tok-err">:</span> <span class="tok-err">500</span></code></pre>
-</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-08-31 15:44:24 BRT
+Last updated 2017-09-03 12:53:22 BRT
 </div>
 </div>
 </body>

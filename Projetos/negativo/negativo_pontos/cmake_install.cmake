@@ -1,4 +1,4 @@
-# Install script for directory: /home/weny/github/wenyaraujo.github.io/Projetos/negativo_pontos
+# Install script for directory: /home/weny/github/wenyaraujo.github.io/Projetos/negativo/negativo_pontos
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/weny/github/wenyaraujo.github.io/Projetos/negativo_pontos/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/weny/github/wenyaraujo.github.io/Projetos/negativo/negativo_pontos/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

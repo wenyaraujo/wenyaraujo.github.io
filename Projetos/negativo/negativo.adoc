@@ -4,7 +4,7 @@
 
 = 1ª Atividade: Negativo de uma imagem.
 
-O objetivo desta atividade é perceber como se aplica o efeito de negativo em imagens digitais em softwares de correção de imagem, utilizando a biblioteca OpenCV.
+O objetivo desta atividade é manipular os pixels de uma imagem utilizando a biblioteca OpenCV.
 
 == Introdução
 
@@ -18,7 +18,7 @@ image::./negativo.png[320,320]
 
 === Código no OpenCV
 
-Para mostrar como foi possível obter o negativo da imagem por meio da biblioteca OpenCV, abaixo podemos observar o código que será explicado em breve.
+Para mostrar como foi possível obter o negativo da imagem por meio da biblioteca OpenCV, abaixo podemos observar o código que será melhor implementado e explicado em breve.
 
 .negativo.cpp
 [source,cpp,options="nowrap"]
@@ -35,20 +35,13 @@ A imagem anterior de Isadora fica assim:
 .Isadora Renascentista (Região negativa)
 image::./points.png[320,320]
 
-e o código utilizado fora:
+=== Código no OpenCV
+
+O código utilizado encontra-se abaixo, bem como comentários feitos no próprio código explicando todos os passos.
 
 .negativo_pontos.cpp
 [source,cpp,options="nowrap"]
 ----
 include::regiao.cpp[]
 ----
-
-Os pontos utilizados foram:
-
-[source,txt,options="nowrap"]
-----
-include::teste.txt[]
-----
-
-
 

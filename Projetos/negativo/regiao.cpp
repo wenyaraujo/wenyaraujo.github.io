@@ -8,11 +8,24 @@ int main(int, char**){
   Mat image;
   Vec3b val;
 
-  image= imread("pp.png",CV_LOAD_IMAGE_GRAYSCALE);
+//carregando a imagem
+
+  image= imread("pp.png",CV_LOAD_IMAGE_GRAYSCALE); 
   if(!image.data)
     cout << "nao abriu pp.png" << endl;
 
+//declarando variáveis para inserção dos pontos pelo usuário
+
 	int x1, y1, x2, y2;
+
+//atribuindo, através do "Do", os pontos informados 
+//pelo usuário nas variáveis.
+
+//o "while" está para que as variáveis façam uma varredura 
+//pelas linhas da matriz da imagem, caso não for um valor 
+//possível, não é possível alocar. 
+
+cout << "O tamanho da imagem é: " << image.size().height << "/"<< image.size().width << " Escreva pontos dentro desse limite."<< endl;
 
 		do{ 
 			cout << "digite o primeiro ponto (x):" << endl;
@@ -38,9 +51,15 @@ int main(int, char**){
 			}
 			while(y2 >=image.cols);
 	
+//aqui utilizou-se um "for" para fazer a iteração e,
+//do ponto inicial informado pelo usuário, até o ponto
+//final, ele irá aplicar o negativo.
+
   for(int i=x1; i<x2; i++){
     for(int j=y1; j<y2; j++){
-      image.at<uchar>(i,j)=255-image.at<uchar>(i,j);
+      image.at<uchar>(i,j)=255-image.at<uchar>(i,j); //nesta linha
+//ocorre a aplicação do negativo. 
+//"255" menos o valor do pixel alocado.
     }
   }
   
