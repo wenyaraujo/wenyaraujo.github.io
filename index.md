@@ -6,7 +6,7 @@ You can use the [facebook's page](https://facebook.com/wenyvasconcelos) to make 
 
 Instead you can send me an e-mail: wenymaysa.va@gmail.com
 
-[Projects - Digital Image Processing](Projetos/projetos.html)
+[Projects - Digital Image Processing (in portuguese)](Projetos/projetos.html)
 
 
 
