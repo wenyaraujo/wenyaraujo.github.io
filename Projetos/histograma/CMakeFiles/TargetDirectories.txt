@@ -1,0 +1,3 @@
+/home/weny/github/wenyaraujo.github.io/Projetos/histograma/CMakeFiles/edit_cache.dir
+/home/weny/github/wenyaraujo.github.io/Projetos/histograma/CMakeFiles/rebuild_cache.dir
+/home/weny/github/wenyaraujo.github.io/Projetos/histograma/CMakeFiles/equalize.dir

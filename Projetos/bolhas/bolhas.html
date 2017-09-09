@@ -541,22 +541,34 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>O papel da função FloodFill é exatamente este. Processar os valores e atribuir um novo valor de tom de cinza ao "aglomerado de pixel" que encontrar - o objeto.</p>
 </div>
 <div class="paragraph">
-<p>A imagem anterior fica assim:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./flood.png" alt="320" width="320">
-</div>
-<div class="title">Figure 2. Bolhas com o floodfill</div>
+<p>Porém, torna-se falho caso haja um número de objetos superior a 255, uma vez que não haveria mais um valor de tom de cinza para associar a aquele objeto. Assim, faz-se necessário a atualização do algoritmo para uma quantidade maior de objetos (caso haja). Dessa forma, fora implementado um código que reconheça até 16581375 (255x255x255) objetos. Fizemos uso da ideia de que podemos associar em RGB, ou seja, ao invés de apenas 255 tons de cinza, agora temos 255 para o Red, 255 para o Green e 255 para o Blue.</p>
 </div>
 <div class="paragraph">
-<p>Após retirada das bolhas que tocam as bordas e mudança do fundo, a imagem está preparada para ser tratada, ou seja, contar quantas destas que restaram contém buracos.</p>
+<p>É preciso retirar as "bolhas" que tocam a borda da imagem, uma vez que não podemos identificar se estas realmente são bolhas ou não, se tem buracos ou não. Assim, fora feito o procedimento de retirada desses objetos. A imagem então fica da seginte forma:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./ds.png" alt="320" width="320">
+<img src="./1.png" alt="320" width="320">
 </div>
-<div class="title">Figure 3. Imagem a ser tratada pelo código de identificação de buraco</div>
+<div class="title">Figure 2. Imagem sem objetos que tocam a borda</div>
+</div>
+<div class="paragraph">
+<p>Após retirada dos objetos que tocam as bordas, a imagem está preparada para ser tratada, ou seja, contar quantas destas que restaram contém buracos. Mais uma vez, a imagem anterior é modificada:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./2.png" alt="320" width="320">
+</div>
+<div class="title">Figure 3. Bolhas com buracos</div>
+</div>
+<div class="paragraph">
+<p>Por fim, podemos perceber abaixo as imagens com o floodfill, ou seja, com cada objeto e sua "identificação".</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./labeling-result.png" alt="320" width="320">
+</div>
+<div class="title">Figure 4. Objetos rotulados</div>
 </div>
 <div class="sect2">
 <h3 id="_código_no_opencv">Código no OpenCV</h3>
@@ -569,97 +581,146 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span class="tok-k">using</span> <span class="tok-k">namespace</span> <span class="tok-n">cv</span><span class="tok-p">;</span>
 <span class="tok-k">using</span> <span class="tok-k">namespace</span> <span class="tok-n">std</span><span class="tok-p">;</span>
 
-<span class="tok-kt">int</span> <span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">,</span> <span class="tok-kt">char</span><span class="tok-o">**</span><span class="tok-p">){</span>
-  <span class="tok-n">Mat</span> <span class="tok-n">image</span><span class="tok-p">;</span>
-  <span class="tok-kt">int</span> <span class="tok-n">larg</span><span class="tok-p">,</span> <span class="tok-n">alt</span><span class="tok-p">,</span> <span class="tok-n">sobj</span><span class="tok-p">,</span> <span class="tok-n">sbur</span><span class="tok-p">;</span>  <span class="tok-c1">//variáveis para implementação do código.</span>
-  <span class="tok-n">vector</span><span class="tok-o">&lt;</span><span class="tok-kt">int</span><span class="tok-o">&gt;</span> <span class="tok-n">obj</span><span class="tok-p">;</span> <span class="tok-c1">//vetor obj que auxilia na &quot;varredura&quot; dos pixels</span>
-	<span class="tok-n">CvPoint</span> <span class="tok-n">p</span><span class="tok-p">;</span> 	<span class="tok-c1">//p é um ponto.</span>
+<span class="tok-kt">int</span> <span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">argc</span><span class="tok-p">,</span> <span class="tok-kt">char</span><span class="tok-o">**</span> <span class="tok-n">argv</span><span class="tok-p">){</span>
+  <span class="tok-n">Mat</span> <span class="tok-n">image</span><span class="tok-p">;</span>																					<span class="tok-c1">//Imagem a ser modificada</span>
+	<span class="tok-kt">int</span> <span class="tok-n">width</span><span class="tok-p">,</span> <span class="tok-n">height</span><span class="tok-p">;</span>																	<span class="tok-c1">//Largura e altura da imagem</span>
+	<span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">;</span>																						<span class="tok-c1">//Variáveis auxiliares para percorrer a imagem</span>
+	<span class="tok-n">CvPoint</span> <span class="tok-n">p</span><span class="tok-p">;</span>																					<span class="tok-c1">//Ponto da imagem a ser usado no floodfill</span>
+	<span class="tok-kt">unsigned</span> <span class="tok-kt">long</span> <span class="tok-kt">int</span> <span class="tok-n">contador_bolhas</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span>							<span class="tok-c1">//Variável para contagem de bolhas. A contagem é feita pela mudança RGB,</span>
+																											<span class="tok-c1">//sendo necessário ao menos 24 bits.</span>
+	<span class="tok-kt">unsigned</span> <span class="tok-kt">long</span> <span class="tok-kt">int</span> <span class="tok-n">contador_bolhas_com_buracos</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span>	<span class="tok-c1">//Variável para contagem de bolhas com buracos.</span>
+	<span class="tok-kt">unsigned</span> <span class="tok-kt">long</span> <span class="tok-kt">int</span> <span class="tok-n">contador_bolhas_sem_buracos</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span>	<span class="tok-c1">//Variável para contagem de bolhas sem buracos.</span>
+	<span class="tok-n">Vec3b</span> <span class="tok-n">cor_bolha_com_buraco</span><span class="tok-p">(</span><span class="tok-mi">255</span><span class="tok-p">,</span><span class="tok-mi">0</span><span class="tok-p">,</span><span class="tok-mi">0</span><span class="tok-p">);</span>								<span class="tok-c1">//Cor identificadora de bolhas com buracos (Azul)</span>
+	<span class="tok-n">Vec3b</span> <span class="tok-n">branco</span><span class="tok-p">(</span><span class="tok-mi">255</span><span class="tok-p">,</span><span class="tok-mi">255</span><span class="tok-p">,</span><span class="tok-mi">255</span><span class="tok-p">);</span>													<span class="tok-c1">//Cor das bolhas</span>
+	<span class="tok-n">Vec3b</span> <span class="tok-n">preto</span> <span class="tok-p">(</span><span class="tok-mi">0</span><span class="tok-p">,</span><span class="tok-mi">0</span><span class="tok-p">,</span><span class="tok-mi">0</span><span class="tok-p">);</span>																<span class="tok-c1">//Cor de fundo da imagem</span>
+	<span class="tok-n">Vec3b</span> <span class="tok-n">label</span><span class="tok-p">;</span>																				<span class="tok-c1">//Cor para labelling</span>
 
-  <span class="tok-n">image</span> <span class="tok-o">=</span> <span class="tok-n">imread</span><span class="tok-p">(</span><span class="tok-s">&quot;bolhas.png&quot;</span><span class="tok-p">,</span><span class="tok-n">CV_LOAD_IMAGE_GRAYSCALE</span><span class="tok-p">);</span>
-  <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">data</span><span class="tok-p">)</span>
-    <span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;A imagem não pôde ser carregada ou está corrompida.&quot;</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">endl</span><span class="tok-p">;</span>
 
-  <span class="tok-n">larg</span><span class="tok-o">=</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">().</span><span class="tok-n">width</span><span class="tok-p">;</span> <span class="tok-c1">//definindo largura como sendo a da imagem lida</span>
-  <span class="tok-n">alt</span><span class="tok-o">=</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">().</span><span class="tok-n">height</span><span class="tok-p">;</span> <span class="tok-c1">//definindo altura como sendo a da imagem lida</span>
+	<span class="tok-c1">//============== Aquisição da Imagem ========================================</span>
+	<span class="tok-n">image</span> <span class="tok-o">=</span> <span class="tok-n">imread</span><span class="tok-p">(</span><span class="tok-n">argv</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">],</span><span class="tok-n">CV_LOAD_IMAGE_COLOR</span><span class="tok-p">);</span>				<span class="tok-c1">//Leitura da imagem</span>
+	<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">data</span><span class="tok-p">){</span>																		<span class="tok-c1">//Teste de falha na leitura</span>
+    <span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;Imagem nao carregou corretamente.</span><span class="tok-se">\n</span><span class="tok-s">&quot;</span><span class="tok-p">;</span>
+    <span class="tok-k">return</span><span class="tok-p">(</span><span class="tok-o">-</span><span class="tok-mi">1</span><span class="tok-p">);</span>
+	<span class="tok-p">}</span>
 
+	<span class="tok-n">width</span><span class="tok-o">=</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">().</span><span class="tok-n">width</span><span class="tok-p">;</span>														<span class="tok-c1">//Largura da imagem</span>
+  <span class="tok-n">height</span><span class="tok-o">=</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">().</span><span class="tok-n">height</span><span class="tok-p">;</span>													<span class="tok-c1">//Altura da imagem</span>
 
-  <span class="tok-c1">// procurando objetos partindo do 0 e usando um for para varrer a imagem</span>
-  <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span>
-  <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span>
+	<span class="tok-c1">//============== Remoção de bolhas que tocam a borda da imagem ==============</span>
 
-  <span class="tok-n">sobj</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span>
-  <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-n">alt</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">){</span>
-    <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">&lt;</span><span class="tok-n">larg</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">){</span>
-      <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-mi">255</span><span class="tok-p">){</span>
-		    <span class="tok-c1">// achou um objeto</span>
-		    <span class="tok-n">sobj</span><span class="tok-o">++</span><span class="tok-p">;</span>
-		    <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span><span class="tok-p">;</span>
-		    <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>
-		    <span class="tok-n">floodFill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-n">sobj</span><span class="tok-p">);</span> <span class="tok-c1">//utilizando da função floodfill</span>
-	    <span class="tok-p">}</span>
+	<span class="tok-c1">//Remoção na lateral esquerda: índice j = 0 para primeira coluna, e índice i varre todas as linhas</span>
+	<span class="tok-c1">//Caso encontre um pixel branco, realiza o floodfill para a cor de fundo (preto)</span>
+	<span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
+	<span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">height</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">){</span>
+		<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">Vec3b</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-n">branco</span><span class="tok-p">){</span>
+				<span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span><span class="tok-p">;</span> <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>
+				<span class="tok-n">floodFill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-n">preto</span><span class="tok-p">);</span>
+		<span class="tok-p">}</span>
+	<span class="tok-p">}</span>
+
+	<span class="tok-c1">//Remoção na lateral direita: índice j = largura - 1 para a última coluna, e índice i varre todas as linhas</span>
+	<span class="tok-c1">//Caso encontre um pixel branco, realiza o floodfill para a cor de fundo (preto)</span>
+	<span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span> <span class="tok-o">=</span> <span class="tok-n">width</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">;</span>
+	<span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span> <span class="tok-o">&lt;</span> <span class="tok-n">height</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">){</span>
+		<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">Vec3b</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-n">branco</span><span class="tok-p">){</span>
+				<span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span><span class="tok-p">;</span> <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>
+				<span class="tok-n">floodFill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-n">preto</span><span class="tok-p">);</span>
+		<span class="tok-p">}</span>
+	<span class="tok-p">}</span>
+
+	<span class="tok-c1">//Remoção na linha superior: indice i = 0 para a primeira linha, e índice j varre todas as colunas</span>
+	<span class="tok-c1">//Caso encontre um pixel branco, realiza o floodfill para a cor de fundo (preto)</span>
+	<span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
+	<span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-n">j</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span> <span class="tok-o">&lt;</span> <span class="tok-n">width</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">){</span>
+		<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">Vec3b</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-n">branco</span><span class="tok-p">){</span>
+				<span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span><span class="tok-p">;</span> <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>
+				<span class="tok-n">floodFill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-n">preto</span><span class="tok-p">);</span>
 	  <span class="tok-p">}</span>
-  <span class="tok-p">}</span>
+	<span class="tok-p">}</span>
 
-  <span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;image&quot;</span><span class="tok-p">,</span> <span class="tok-n">image</span><span class="tok-p">);</span>
-  <span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;flood.png&quot;</span><span class="tok-p">,</span> <span class="tok-n">image</span><span class="tok-p">);</span>
-  <span class="tok-n">waitKey</span><span class="tok-p">();</span>
+	<span class="tok-c1">//Remoção na linha inferior: índice i = altura - 1, e índice j varre todas as colunas</span>
+	<span class="tok-c1">//Caso encontre um pixel branco, realiza o floodfill para a cor de fundo (preto)</span>
+	<span class="tok-n">i</span> <span class="tok-o">=</span> <span class="tok-n">height</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">;</span> <span class="tok-n">j</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
+	<span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-n">j</span> <span class="tok-o">=</span> <span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span> <span class="tok-o">&lt;</span> <span class="tok-n">width</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">){</span>
+		<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">Vec3b</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-n">branco</span><span class="tok-p">){</span>
+				<span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span><span class="tok-p">;</span> <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>
+				<span class="tok-n">floodFill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-n">preto</span><span class="tok-p">);</span>
+	  <span class="tok-p">}</span>
+	<span class="tok-p">}</span>
 
-  <span class="tok-c1">//retirando objetos que tocam nas bordas</span>
 
-  <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-n">alt</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">){</span>
-    <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">&lt;</span><span class="tok-n">larg</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">){</span>
-      <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-o">==</span><span class="tok-mi">0</span> <span class="tok-o">|</span> <span class="tok-n">i</span><span class="tok-o">==</span><span class="tok-mi">255</span> <span class="tok-o">|</span> <span class="tok-n">j</span><span class="tok-o">==</span><span class="tok-mi">0</span> <span class="tok-o">|</span> <span class="tok-n">j</span><span class="tok-o">==</span><span class="tok-mi">255</span><span class="tok-p">){</span>
-        <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">!=</span> <span class="tok-mi">0</span><span class="tok-p">){</span>
-          <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span><span class="tok-p">;</span>
-          <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>
-          <span class="tok-n">floodFill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-mi">0</span><span class="tok-p">);</span>
-        <span class="tok-p">}</span>
-      <span class="tok-p">}</span>
-    <span class="tok-p">}</span>
-  <span class="tok-p">}</span>
-  <span class="tok-c1">//trocando o fundo da imagem para valor 255</span>
+	<span class="tok-c1">//================ Alteração da cor de fundo da imagem ==========================</span>
+	<span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span>																							<span class="tok-c1">//O ponto 0,0 faz parte do fundo da imagem</span>
+	<span class="tok-n">floodFill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-n">Scalar</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">));</span> 												<span class="tok-c1">//Após essa modificação, apenas os buracos estarão com cor preta (0,0,0)</span>
 
-  <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span>
-  <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span>
-  <span class="tok-n">floodFill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-mi">255</span><span class="tok-p">);</span>
+	<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;1.png&quot;</span><span class="tok-p">,</span> <span class="tok-n">image</span><span class="tok-p">);</span>
+	<span class="tok-c1">//================ Identificar bolhas com buracos	===============================</span>
+	<span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-n">height</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">){</span>
+    <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">&lt;</span><span class="tok-n">width</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">){</span>
+      <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">Vec3b</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-n">preto</span><span class="tok-p">){</span>										<span class="tok-c1">//Caso seja encontrado um pixel pertencente a um buraco</span>
+				<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">Vec3b</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-o">-</span><span class="tok-mi">1</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-n">cor_bolha_com_buraco</span><span class="tok-p">){}</span><span class="tok-c1">//E o pixel anterior mostrar que a bolha já foi identificada,</span>
+																														<span class="tok-c1">//Não fazer nada</span>
+				<span class="tok-k">else</span> <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">Vec3b</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-o">-</span><span class="tok-mi">1</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-n">branco</span><span class="tok-p">){</span>					<span class="tok-c1">//Caso o pixel anterior não tenha a cor identificadora, mas seja branco</span>
+					<span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span> <span class="tok-o">-</span> <span class="tok-mi">1</span><span class="tok-p">;</span> <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>																	<span class="tok-c1">//Estamos tratando de uma bolha com buraco</span>
+					<span class="tok-n">floodFill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-n">cor_bolha_com_buraco</span><span class="tok-p">);</span>					<span class="tok-c1">//Então mudamos a bolha para uma cor identificadora</span>
+				<span class="tok-p">}</span>
+			<span class="tok-p">}</span>
+		<span class="tok-p">}</span>
+	<span class="tok-p">}</span>
 
-	<span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;image&quot;</span><span class="tok-p">,</span> <span class="tok-n">image</span><span class="tok-p">);</span>
-  <span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;ds.png&quot;</span><span class="tok-p">,</span> <span class="tok-n">image</span><span class="tok-p">);</span>
-  <span class="tok-n">waitKey</span><span class="tok-p">();</span>
+	<span class="tok-c1">//================ Alteração da cor de fundo da imagem ==========================</span>
+	<span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span>																							<span class="tok-c1">//O ponto 0,0 faz parte do fundo da imagem</span>
+	<span class="tok-n">floodFill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-n">preto</span><span class="tok-p">);</span> 																<span class="tok-c1">//Deixa a cor de fundo como preto novamente</span>
 
-  <span class="tok-c1">//procurando objetos com buracos</span>
+	<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;2.png&quot;</span><span class="tok-p">,</span> <span class="tok-n">image</span><span class="tok-p">);</span>
+	<span class="tok-c1">//================ Realizar o labelling das bolhas ==============================</span>
+	<span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-n">height</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">){</span>
+    <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">&lt;</span><span class="tok-n">width</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">){</span>
+			<span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span><span class="tok-p">;</span> <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>
+			<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">Vec3b</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-n">branco</span><span class="tok-p">){</span>										<span class="tok-c1">//Caso seja encontrado uma bolha branca</span>
+				<span class="tok-n">contador_bolhas</span><span class="tok-o">++</span><span class="tok-p">;</span>																	<span class="tok-c1">//Incrementa o contador para labelling</span>
+				<span class="tok-n">contador_bolhas_sem_buracos</span><span class="tok-o">++</span><span class="tok-p">;</span>											<span class="tok-c1">//Incrementa a contagem de bolhas sem buraco</span>
+				<span class="tok-n">label</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">]</span> <span class="tok-o">=</span> <span class="tok-n">contador_bolhas</span> <span class="tok-o">&amp;</span> <span class="tok-mh">0x0000FF</span><span class="tok-p">;</span>							<span class="tok-c1">//Atribui à componente B, os 8 bits menos significativos do contador</span>
+				<span class="tok-n">label</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">]</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-n">contador_bolhas</span> <span class="tok-o">&amp;</span> <span class="tok-mh">0x00FF00</span><span class="tok-p">)</span> <span class="tok-o">&gt;&gt;</span> <span class="tok-mi">8</span><span class="tok-p">;</span>				<span class="tok-c1">//Atribui à componente G, os bits 15-8  do contador</span>
+				<span class="tok-n">label</span><span class="tok-p">[</span><span class="tok-mi">2</span><span class="tok-p">]</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-n">contador_bolhas</span> <span class="tok-o">&amp;</span> <span class="tok-mh">0xFF0000</span><span class="tok-p">)</span> <span class="tok-o">&gt;&gt;</span> <span class="tok-mi">16</span><span class="tok-p">;</span>			<span class="tok-c1">//Atribui à componente R, os bits 23-16 do contador</span>
+				<span class="tok-n">floodFill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-n">label</span><span class="tok-p">);</span>														<span class="tok-c1">//Realiza o labelling da bolha</span>
+			<span class="tok-p">}</span>
+			<span class="tok-k">else</span> <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">Vec3b</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-n">cor_bolha_com_buraco</span><span class="tok-p">){</span><span class="tok-c1">////Caso seja encontrado uma bolha com a cor identificadora que possui buraco</span>
+				<span class="tok-n">contador_bolhas</span><span class="tok-o">++</span><span class="tok-p">;</span>																	<span class="tok-c1">//Incrementa o contador para labelling</span>
+				<span class="tok-n">contador_bolhas_com_buracos</span><span class="tok-o">++</span><span class="tok-p">;</span>											<span class="tok-c1">//Incrementa a contagem de bolhas com buraco</span>
+				<span class="tok-n">label</span><span class="tok-p">[</span><span class="tok-mi">0</span><span class="tok-p">]</span> <span class="tok-o">=</span>  <span class="tok-n">contador_bolhas</span> <span class="tok-o">&amp;</span> <span class="tok-mh">0x0000FF</span><span class="tok-p">;</span>							<span class="tok-c1">//Atribui à componente B, os 8 bits menos significativos do contador</span>
+				<span class="tok-n">label</span><span class="tok-p">[</span><span class="tok-mi">1</span><span class="tok-p">]</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-n">contador_bolhas</span> <span class="tok-o">&amp;</span> <span class="tok-mh">0x00FF00</span><span class="tok-p">)</span> <span class="tok-o">&gt;&gt;</span> <span class="tok-mi">8</span><span class="tok-p">;</span>				<span class="tok-c1">//Atribui à componente G, os bits 15-8  do contador</span>
+				<span class="tok-n">label</span><span class="tok-p">[</span><span class="tok-mi">2</span><span class="tok-p">]</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-n">contador_bolhas</span> <span class="tok-o">&amp;</span> <span class="tok-mh">0xFF0000</span><span class="tok-p">)</span> <span class="tok-o">&gt;&gt;</span> <span class="tok-mi">16</span><span class="tok-p">;</span>			<span class="tok-c1">//Atribui à componente R, os bits 23-16 do contador</span>
+				<span class="tok-n">floodFill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-n">label</span><span class="tok-p">);</span>														<span class="tok-c1">//Realiza o labelling da bolha</span>
+			<span class="tok-p">}</span>
+		<span class="tok-p">}</span>
+	<span class="tok-p">}</span>
 
-  <span class="tok-n">sbur</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span>
-  <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">i</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">&lt;</span><span class="tok-n">alt</span><span class="tok-p">;</span> <span class="tok-n">i</span><span class="tok-o">++</span><span class="tok-p">){</span>
-    <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">j</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">&lt;</span><span class="tok-n">larg</span><span class="tok-p">;</span> <span class="tok-n">j</span><span class="tok-o">++</span><span class="tok-p">){</span>
-      <span class="tok-kt">int</span> <span class="tok-n">flag</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span>
-      <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span><span class="tok-n">j</span><span class="tok-p">)</span> <span class="tok-o">==</span> <span class="tok-mi">0</span><span class="tok-p">){</span> <span class="tok-c1">//achou um buraco</span>
+	<span class="tok-c1">//============= Exibe resultado ===================================================</span>
+	<span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;Número de bolhas sem buracos: &quot;</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">contador_bolhas_sem_buracos</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">endl</span><span class="tok-p">;</span>
+	<span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;Número de bolhas com buracos: &quot;</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">contador_bolhas_com_buracos</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">endl</span><span class="tok-p">;</span>
+	<span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;Número total de bolhas: &quot;</span> 			 <span class="tok-o">&lt;&lt;</span> <span class="tok-n">contador_bolhas</span> 						<span class="tok-o">&lt;&lt;</span> <span class="tok-n">endl</span><span class="tok-p">;</span>
 
-        <span class="tok-kt">int</span> <span class="tok-n">ant</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-kt">int</span><span class="tok-p">)</span> <span class="tok-n">image</span><span class="tok-p">.</span><span class="tok-n">at</span><span class="tok-o">&lt;</span><span class="tok-n">uchar</span><span class="tok-o">&gt;</span><span class="tok-p">(</span><span class="tok-n">i</span><span class="tok-p">,</span> <span class="tok-n">j</span><span class="tok-o">-</span><span class="tok-mi">1</span><span class="tok-p">);</span> <span class="tok-c1">//salva o valor do pixel anterior à semente do buraco encontrado</span>
+	<span class="tok-n">namedWindow</span><span class="tok-p">(</span><span class="tok-s">&quot;Labelling&quot;</span><span class="tok-p">,</span><span class="tok-n">CV_WINDOW_KEEPRATIO</span><span class="tok-p">);</span>							<span class="tok-c1">//Cria janela</span>
+  <span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Labelling&quot;</span><span class="tok-p">,</span> <span class="tok-n">image</span><span class="tok-p">);</span>																<span class="tok-c1">//Exibe imagem na janela criada</span>
+  <span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;labeling-result.png&quot;</span><span class="tok-p">,</span> <span class="tok-n">image</span><span class="tok-p">);</span>										<span class="tok-c1">//Gera arquivo com a imagem resultante</span>
+  <span class="tok-n">waitKey</span><span class="tok-p">();</span>																								<span class="tok-c1">//Espera teclado ser pressionado para finalizar o programa</span>
 
-        <span class="tok-k">for</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">k</span><span class="tok-o">=</span><span class="tok-mi">0</span><span class="tok-p">;</span> <span class="tok-n">k</span><span class="tok-o">&lt;</span><span class="tok-n">obj</span><span class="tok-p">.</span><span class="tok-n">size</span><span class="tok-p">();</span> <span class="tok-n">k</span><span class="tok-o">++</span><span class="tok-p">){</span>
-          <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">ant</span> <span class="tok-o">==</span> <span class="tok-n">obj</span><span class="tok-p">[</span><span class="tok-n">k</span><span class="tok-p">]){</span>
-            <span class="tok-n">flag</span><span class="tok-o">=</span><span class="tok-mi">1</span><span class="tok-p">;</span>
-          <span class="tok-p">}</span>
-        <span class="tok-p">}</span>
-        <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">flag</span><span class="tok-o">==</span><span class="tok-mi">0</span><span class="tok-p">){</span>
-          <span class="tok-n">obj</span><span class="tok-p">.</span><span class="tok-n">push_back</span><span class="tok-p">(</span><span class="tok-n">ant</span><span class="tok-p">);</span>
-          <span class="tok-n">sbur</span><span class="tok-o">++</span><span class="tok-p">;</span>
-        <span class="tok-p">}</span>
-
-        <span class="tok-c1">// rotulando o buraco com 255</span>
-        <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">x</span><span class="tok-o">=</span><span class="tok-n">j</span><span class="tok-p">;</span>
-        <span class="tok-n">p</span><span class="tok-p">.</span><span class="tok-n">y</span><span class="tok-o">=</span><span class="tok-n">i</span><span class="tok-p">;</span>
-        <span class="tok-n">floodFill</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">p</span><span class="tok-p">,</span><span class="tok-mi">255</span><span class="tok-p">);</span>
-      <span class="tok-p">}</span>
-    <span class="tok-p">}</span>
-  <span class="tok-p">}</span>
-
-  <span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;O número de bolhas que contém no mínimo 1 buraco e que não toca as bordas são: &quot;</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">sbur</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">endl</span><span class="tok-p">;</span>
-
-  <span class="tok-k">return</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
+	<span class="tok-k">return</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
 <span class="tok-p">}</span></code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>O código então retorna um resultado:</p>
+</div>
+<div class="paragraph">
+<p>Número de bolhas sem buracos: 14</p>
+</div>
+<div class="paragraph">
+<p>Número de bolhas com buracos: 7</p>
+</div>
+<div class="paragraph">
+<p>Número total de bolhas: 21</p>
 </div>
 </div>
 </div>
@@ -667,7 +728,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-09-02 17:59:22 BRT
+Last updated 2017-09-09 20:46:25 BRT
 </div>
 </div>
 </body>

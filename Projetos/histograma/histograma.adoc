@@ -1,0 +1,29 @@
+:toc: left
+
+:source-highlighter: pygments
+
+= 4ª Atividade: .
+
+
+.Bolhas (Original)
+image::./bolhas.png[320,320]
+
+
+== Desenvolvimento da atividade
+
+
+.Bolhas com o floodfill
+image::./flood.png[320,320]
+
+
+=== Código no OpenCV
+
+.bolhas.cpp
+[source,cpp,options="nowrap"]
+----
+include::bolhas.cpp[]
+----
+
+
+
+

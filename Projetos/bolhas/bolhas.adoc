@@ -23,17 +23,24 @@ Nesta atividade, a imagem assume apenas 2 valores de tom de cinza. O fundo com v
 
 O papel da função FloodFill é exatamente este. Processar os valores e atribuir um novo valor de tom de cinza ao "aglomerado de pixel" que encontrar - o objeto.
 
-A imagem anterior fica assim:
+Porém, torna-se falho caso haja um número de objetos superior a 255, uma vez que não haveria mais um valor de tom de cinza para associar a aquele objeto. Assim, faz-se necessário a atualização do algoritmo para uma quantidade maior de objetos (caso haja). Dessa forma, fora implementado um código que reconheça até 16581375 (255x255x255) objetos. Fizemos uso da ideia de que podemos associar em RGB, ou seja, ao invés de apenas 255 tons de cinza, agora temos 255 para o Red, 255 para o Green e 255 para o Blue.
 
-.Bolhas com o floodfill
-image::./flood.png[320,320]
-
+É preciso retirar as "bolhas" que tocam a borda da imagem, uma vez que não podemos identificar se estas realmente são bolhas ou não, se tem buracos ou não. Assim, fora feito o procedimento de retirada desses objetos. A imagem então fica da seginte forma:
 
 
-Após retirada das bolhas que tocam as bordas e mudança do fundo, a imagem está preparada para ser tratada, ou seja, contar quantas destas que restaram contém buracos. 
+.Imagem sem objetos que tocam a borda
+image::./1.png[320,320]
 
-.Imagem a ser tratada pelo código de identificação de buraco
-image::./ds.png[320,320]
+
+Após retirada dos objetos que tocam as bordas, a imagem está preparada para ser tratada, ou seja, contar quantas destas que restaram contém buracos. Mais uma vez, a imagem anterior é modificada:
+
+.Bolhas com buracos
+image::./2.png[320,320]
+
+Por fim, podemos perceber abaixo as imagens com o floodfill, ou seja, com cada objeto e sua "identificação".
+
+.Objetos rotulados
+image::./labeling-result.png[320,320]
 
 === Código no OpenCV
 
@@ -43,6 +50,13 @@ image::./ds.png[320,320]
 include::bolhas.cpp[]
 ----
 
+O código então retorna um resultado:
+
+Número de bolhas sem buracos: 14
+
+Número de bolhas com buracos: 7
+
+Número total de bolhas: 21
 
 
 
