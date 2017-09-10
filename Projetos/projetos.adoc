@@ -2,7 +2,7 @@
 = Projetos de PDI
 Powered by Felipe Omar and Weny Vasconcelos (C) 2017
 
-Seja bem vindo(a)! Aqui você pode encontrar todos os projetos desenvolvidos e em desenvolvimento por mim na disciplina de *Processamento Digital de Imagens*, promovida pelo Departamento de Computação e Automação, Centro de Tecnologia, Universidade Federal do Rio Grande do Norte.
+Seja bem vindo(a)! Aqui você pode encontrar todos os projetos desenvolvidos e em desenvolvimento por nós na disciplina de *Processamento Digital de Imagens*, promovida pelo Departamento de Computação e Automação, Centro de Tecnologia, Universidade Federal do Rio Grande do Norte.
 
 
 === 1ª Atividade: link:negativo/negativo.html[Negativo de uma imagem].
