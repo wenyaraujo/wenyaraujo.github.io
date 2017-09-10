@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/weny/github/wenyaraujo.github.io/Projetos/histograma
+CMAKE_SOURCE_DIR = /home/felipe/github/wenyaraujo.github.io/Projetos/histograma
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/weny/github/wenyaraujo.github.io/Projetos/histograma
+CMAKE_BINARY_DIR = /home/felipe/github/wenyaraujo.github.io/Projetos/histograma
 
 # Include any dependencies generated for this target.
 include CMakeFiles/equalize.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/equalize.dir/flags.make
 
 CMakeFiles/equalize.dir/equalize.cpp.o: CMakeFiles/equalize.dir/flags.make
 CMakeFiles/equalize.dir/equalize.cpp.o: equalize.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/weny/github/wenyaraujo.github.io/Projetos/histograma/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/equalize.dir/equalize.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/equalize.dir/equalize.cpp.o -c /home/weny/github/wenyaraujo.github.io/Projetos/histograma/equalize.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/felipe/github/wenyaraujo.github.io/Projetos/histograma/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/equalize.dir/equalize.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/equalize.dir/equalize.cpp.o -c /home/felipe/github/wenyaraujo.github.io/Projetos/histograma/equalize.cpp
 
 CMakeFiles/equalize.dir/equalize.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/equalize.dir/equalize.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/weny/github/wenyaraujo.github.io/Projetos/histograma/equalize.cpp > CMakeFiles/equalize.dir/equalize.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/felipe/github/wenyaraujo.github.io/Projetos/histograma/equalize.cpp > CMakeFiles/equalize.dir/equalize.cpp.i
 
 CMakeFiles/equalize.dir/equalize.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/equalize.dir/equalize.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/weny/github/wenyaraujo.github.io/Projetos/histograma/equalize.cpp -o CMakeFiles/equalize.dir/equalize.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/felipe/github/wenyaraujo.github.io/Projetos/histograma/equalize.cpp -o CMakeFiles/equalize.dir/equalize.cpp.s
 
 CMakeFiles/equalize.dir/equalize.cpp.o.requires:
 
@@ -90,24 +90,25 @@ equalize_EXTERNAL_OBJECTS =
 
 equalize: CMakeFiles/equalize.dir/equalize.cpp.o
 equalize: CMakeFiles/equalize.dir/build.make
-equalize: /usr/local/opencv/lib/libopencv_shape.so.3.2.0
-equalize: /usr/local/opencv/lib/libopencv_stitching.so.3.2.0
-equalize: /usr/local/opencv/lib/libopencv_superres.so.3.2.0
-equalize: /usr/local/opencv/lib/libopencv_videostab.so.3.2.0
-equalize: /usr/local/opencv/lib/libopencv_objdetect.so.3.2.0
-equalize: /usr/local/opencv/lib/libopencv_calib3d.so.3.2.0
-equalize: /usr/local/opencv/lib/libopencv_features2d.so.3.2.0
-equalize: /usr/local/opencv/lib/libopencv_flann.so.3.2.0
-equalize: /usr/local/opencv/lib/libopencv_highgui.so.3.2.0
-equalize: /usr/local/opencv/lib/libopencv_ml.so.3.2.0
-equalize: /usr/local/opencv/lib/libopencv_photo.so.3.2.0
-equalize: /usr/local/opencv/lib/libopencv_video.so.3.2.0
-equalize: /usr/local/opencv/lib/libopencv_videoio.so.3.2.0
-equalize: /usr/local/opencv/lib/libopencv_imgcodecs.so.3.2.0
-equalize: /usr/local/opencv/lib/libopencv_imgproc.so.3.2.0
-equalize: /usr/local/opencv/lib/libopencv_core.so.3.2.0
+equalize: /usr/local/lib/libopencv_dnn.so.3.3.0
+equalize: /usr/local/lib/libopencv_ml.so.3.3.0
+equalize: /usr/local/lib/libopencv_objdetect.so.3.3.0
+equalize: /usr/local/lib/libopencv_shape.so.3.3.0
+equalize: /usr/local/lib/libopencv_stitching.so.3.3.0
+equalize: /usr/local/lib/libopencv_superres.so.3.3.0
+equalize: /usr/local/lib/libopencv_videostab.so.3.3.0
+equalize: /usr/local/lib/libopencv_calib3d.so.3.3.0
+equalize: /usr/local/lib/libopencv_features2d.so.3.3.0
+equalize: /usr/local/lib/libopencv_flann.so.3.3.0
+equalize: /usr/local/lib/libopencv_highgui.so.3.3.0
+equalize: /usr/local/lib/libopencv_photo.so.3.3.0
+equalize: /usr/local/lib/libopencv_video.so.3.3.0
+equalize: /usr/local/lib/libopencv_videoio.so.3.3.0
+equalize: /usr/local/lib/libopencv_imgcodecs.so.3.3.0
+equalize: /usr/local/lib/libopencv_imgproc.so.3.3.0
+equalize: /usr/local/lib/libopencv_core.so.3.3.0
 equalize: CMakeFiles/equalize.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/weny/github/wenyaraujo.github.io/Projetos/histograma/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable equalize"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/felipe/github/wenyaraujo.github.io/Projetos/histograma/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable equalize"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/equalize.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -124,6 +125,6 @@ CMakeFiles/equalize.dir/clean:
 .PHONY : CMakeFiles/equalize.dir/clean
 
 CMakeFiles/equalize.dir/depend:
-	cd /home/weny/github/wenyaraujo.github.io/Projetos/histograma && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/weny/github/wenyaraujo.github.io/Projetos/histograma /home/weny/github/wenyaraujo.github.io/Projetos/histograma /home/weny/github/wenyaraujo.github.io/Projetos/histograma /home/weny/github/wenyaraujo.github.io/Projetos/histograma /home/weny/github/wenyaraujo.github.io/Projetos/histograma/CMakeFiles/equalize.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/felipe/github/wenyaraujo.github.io/Projetos/histograma && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/felipe/github/wenyaraujo.github.io/Projetos/histograma /home/felipe/github/wenyaraujo.github.io/Projetos/histograma /home/felipe/github/wenyaraujo.github.io/Projetos/histograma /home/felipe/github/wenyaraujo.github.io/Projetos/histograma /home/felipe/github/wenyaraujo.github.io/Projetos/histograma/CMakeFiles/equalize.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/equalize.dir/depend
 
