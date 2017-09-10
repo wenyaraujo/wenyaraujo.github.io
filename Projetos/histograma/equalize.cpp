@@ -5,39 +5,37 @@ using namespace cv;
 using namespace std;
 
 int main(int argc, char** argv){
-  Mat image, out;
-  int width, height;
-  vector<Mat> channels;
-  char key;
+  Mat image, saida;
+  int larg, alt;
+  vector<Mat> canais;
 
   VideoCapture cap;
   cap.open(0);
 
   if(!cap.isOpened()){
-    cout << "cameras indisponiveis";
+    cout << "deu ruim";
     return -1;
     }
 
-  width  = cap.get(CV_CAP_PROP_FRAME_WIDTH);
-  height = cap.get(CV_CAP_PROP_FRAME_HEIGHT);
+  larg  = cap.get(CV_CAP_PROP_FRAME_WIDTH);
+  alt = cap.get(CV_CAP_PROP_FRAME_HEIGHT);
 	
 	while(1){
 
    cap >> image;
    flip(image,image,1);  //espelhar a tela pra deixar a visualização mais fiel da realidade
    cvtColor(image,image,CV_BGR2GRAY); //Convertendo RGB para Escala de Cinza
-   equalizeHist(image, out); //Função do opencv para equalizar o histograma
+   equalizeHist(image, saida); //Função do opencv para equalizar o histograma
 
-   namedWindow("source");
-   namedWindow("output");
-   imshow("souce", image);
-   imshow("output",out);
-   key = waitKey(30);  
-   if(key==27) break;
-   if(key==112){
-     imwrite("saida.png",out);
+   namedWindow("entrada");
+   namedWindow("saida");
+   imshow("entrada", image);
+   imshow("saida",saida);
+	 if(waitKey(30) >= 0) break;    
+		
+     imwrite("saida.png",saida);
      imwrite("entrada.png",image);
-   } 
+    
   }
   return 0;
 }
