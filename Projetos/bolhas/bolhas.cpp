@@ -4,8 +4,6 @@
 using namespace cv;
 using namespace std;
 
-//Testando 123
-
 int main(int argc, char** argv){
   Mat image;																					//Imagem a ser modificada
 	int width, height;																	//Largura e altura da imagem
