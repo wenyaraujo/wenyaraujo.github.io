@@ -29,14 +29,32 @@ O papel da função FloodFill é exatamente este. Processar os valores e atribui
 
 Porém, torna-se falho caso haja um número de objetos superior a 255, uma vez que não haveria mais um valor de tom de cinza para associar a aquele objeto. Assim, faz-se necessário a atualização do algoritmo para uma quantidade maior de objetos (caso haja). Dessa forma, fora implementado um código que reconheça até 16581375 (255x255x255) objetos. Fizemos uso da ideia de que podemos associar em RGB, ou seja, ao invés de apenas 255 tons de cinza, agora temos 255 para o Red, 255 para o Green e 255 para o Blue.
 
-É preciso retirar as "bolhas" que tocam a borda da imagem, uma vez que não podemos identificar se estas realmente são bolhas ou não, se tem buracos ou não. Assim, fora feito o procedimento de retirada desses objetos. A imagem então fica da seginte forma:
+É preciso retirar as "bolhas" que tocam a borda da imagem, uma vez que não podemos identificar se estas realmente são bolhas ou não, se tem buracos ou não. Dessa forma, o programa se baseará no seguinte fluxograma:
 
+.Fluxograma a ser implementado
+image::./fluxograma_bolhas.png[128,256]
+
+
+
+=== Código no OpenCV
+
+O código feito pode ser visto a seguir, com os devidos comentários:
+
+.bolhas.cpp
+[source,cpp,options="nowrap"]
+----
+include::bolhas.cpp[]
+----
+
+=== Resultados
+
+Foram observados as imagens processadas em diferentes momentos de execução do programa. O primeiro passo, que seria realizar a retirada das bolhas que tocam as bordas, apresentou o seguinte resultado:
 
 .Imagem sem objetos que tocam a borda
 image::./1.png[320,320]
 
 
-Após retirada dos objetos que tocam as bordas, a imagem está preparada para ser tratada, ou seja, contar quantas destas que restaram contém buracos. Mais uma vez, a imagem anterior é modificada:
+Após retirada dos objetos que tocam as bordas, a imagem está preparada para ser tratada, ou seja, contar quantas destas que restaram contém buracos. Mais uma vez, a imagem anterior é modificada, fazendo a identificação de bolhas com buracos através da cor azul:
 
 .Bolhas com buracos
 image::./2.png[320,320]
@@ -46,21 +64,10 @@ Por fim, podemos perceber abaixo as imagens com o floodfill, ou seja, com cada o
 .Objetos rotulados
 image::./labeling-result.png[320,320]
 
-=== Código no OpenCV
-
-.bolhas.cpp
-[source,cpp,options="nowrap"]
-----
-include::bolhas.cpp[]
-----
-
-O código então retorna um resultado:
+O código então retorna o resultado:
 
 Número de bolhas sem buracos: 14
 
 Número de bolhas com buracos: 7
 
 Número total de bolhas: 21
-
-
-
