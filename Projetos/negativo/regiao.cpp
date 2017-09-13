@@ -30,24 +30,32 @@ cout << "O tamanho da imagem é: " << image.size().height << "/"<< image.size().
 		do{ 
 			cout << "digite o primeiro ponto (x):" << endl;
 			cin >> x1;
+			if(x1 >= image.rows || x1 < 0)
+				cout << "Número Inválido :). Insira Novamente." << endl;
 			}
 			while(x1 >=image.rows);
 
 		do{ 
 			cout << "digite o primeiro ponto (y):" << endl;
 			cin >> y1;
+			if(y1 >= image.cols || y1 < 0)
+				cout << "Número Inválido :). Insira Novamente." << endl;
 			}
 			while(y1 >=image.cols);
 
 		do{ 
 			cout << "digite o segundo ponto (x):" << endl;
 			cin >> x2;
+			if(x2 >= image.rows || x2 < 0)
+				cout << "Número Inválido :). Insira Novamente." << endl;
 			}
 			while(x2 >=image.rows);
 
 		do{ 
 			cout << "digite o segundo ponto (y):" << endl;
 			cin >> y2;
+			if(y2 >= image.cols || y2 < 0)
+				cout << "Número Inválido :). Insira Novamente." << endl;
 			}
 			while(y2 >=image.cols);
 	

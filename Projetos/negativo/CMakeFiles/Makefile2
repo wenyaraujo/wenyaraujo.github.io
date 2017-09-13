@@ -54,45 +54,45 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/weny/github/wenyaraujo.github.io/Projetos/negativo
+CMAKE_SOURCE_DIR = /home/felipe/github/wenyaraujo.github.io/Projetos/negativo
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/weny/github/wenyaraujo.github.io/Projetos/negativo
+CMAKE_BINARY_DIR = /home/felipe/github/wenyaraujo.github.io/Projetos/negativo
 
 #=============================================================================
-# Target rules for target CMakeFiles/regions.dir
+# Target rules for target CMakeFiles/regiao.dir
 
 # All Build rule for target.
-CMakeFiles/regions.dir/all:
-	$(MAKE) -f CMakeFiles/regions.dir/build.make CMakeFiles/regions.dir/depend
-	$(MAKE) -f CMakeFiles/regions.dir/build.make CMakeFiles/regions.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/weny/github/wenyaraujo.github.io/Projetos/negativo/CMakeFiles --progress-num=1,2 "Built target regions"
-.PHONY : CMakeFiles/regions.dir/all
+CMakeFiles/regiao.dir/all:
+	$(MAKE) -f CMakeFiles/regiao.dir/build.make CMakeFiles/regiao.dir/depend
+	$(MAKE) -f CMakeFiles/regiao.dir/build.make CMakeFiles/regiao.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/felipe/github/wenyaraujo.github.io/Projetos/negativo/CMakeFiles --progress-num=1,2 "Built target regiao"
+.PHONY : CMakeFiles/regiao.dir/all
 
 # Include target in all.
-all: CMakeFiles/regions.dir/all
+all: CMakeFiles/regiao.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/regions.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/weny/github/wenyaraujo.github.io/Projetos/negativo/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/regions.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/weny/github/wenyaraujo.github.io/Projetos/negativo/CMakeFiles 0
-.PHONY : CMakeFiles/regions.dir/rule
+CMakeFiles/regiao.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/felipe/github/wenyaraujo.github.io/Projetos/negativo/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/regiao.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/felipe/github/wenyaraujo.github.io/Projetos/negativo/CMakeFiles 0
+.PHONY : CMakeFiles/regiao.dir/rule
 
 # Convenience name for target.
-regions: CMakeFiles/regions.dir/rule
+regiao: CMakeFiles/regiao.dir/rule
 
-.PHONY : regions
-
-# clean rule for target.
-CMakeFiles/regions.dir/clean:
-	$(MAKE) -f CMakeFiles/regions.dir/build.make CMakeFiles/regions.dir/clean
-.PHONY : CMakeFiles/regions.dir/clean
+.PHONY : regiao
 
 # clean rule for target.
-clean: CMakeFiles/regions.dir/clean
+CMakeFiles/regiao.dir/clean:
+	$(MAKE) -f CMakeFiles/regiao.dir/build.make CMakeFiles/regiao.dir/clean
+.PHONY : CMakeFiles/regiao.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/regiao.dir/clean
 
 .PHONY : clean
 

@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/weny/github/wenyaraujo.github.io/Projetos/negativo
+CMAKE_SOURCE_DIR = /home/felipe/github/wenyaraujo.github.io/Projetos/negativo
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/weny/github/wenyaraujo.github.io/Projetos/negativo
+CMAKE_BINARY_DIR = /home/felipe/github/wenyaraujo.github.io/Projetos/negativo
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/weny/github/wenyaraujo.github.io/Projetos/negativo/CMakeFiles /home/weny/github/wenyaraujo.github.io/Projetos/negativo/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/felipe/github/wenyaraujo.github.io/Projetos/negativo/CMakeFiles /home/felipe/github/wenyaraujo.github.io/Projetos/negativo/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/weny/github/wenyaraujo.github.io/Projetos/negativo/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/felipe/github/wenyaraujo.github.io/Projetos/negativo/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named regions
+# Target rules for targets named regiao
 
 # Build rule for target.
-regions: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 regions
-.PHONY : regions
+regiao: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 regiao
+.PHONY : regiao
 
 # fast build rule for target.
-regions/fast:
-	$(MAKE) -f CMakeFiles/regions.dir/build.make CMakeFiles/regions.dir/build
-.PHONY : regions/fast
+regiao/fast:
+	$(MAKE) -f CMakeFiles/regiao.dir/build.make CMakeFiles/regiao.dir/build
+.PHONY : regiao/fast
 
-regions.o: regions.cpp.o
+regiao.o: regiao.cpp.o
 
-.PHONY : regions.o
+.PHONY : regiao.o
 
 # target to build an object file
-regions.cpp.o:
-	$(MAKE) -f CMakeFiles/regions.dir/build.make CMakeFiles/regions.dir/regions.cpp.o
-.PHONY : regions.cpp.o
+regiao.cpp.o:
+	$(MAKE) -f CMakeFiles/regiao.dir/build.make CMakeFiles/regiao.dir/regiao.cpp.o
+.PHONY : regiao.cpp.o
 
-regions.i: regions.cpp.i
+regiao.i: regiao.cpp.i
 
-.PHONY : regions.i
+.PHONY : regiao.i
 
 # target to preprocess a source file
-regions.cpp.i:
-	$(MAKE) -f CMakeFiles/regions.dir/build.make CMakeFiles/regions.dir/regions.cpp.i
-.PHONY : regions.cpp.i
+regiao.cpp.i:
+	$(MAKE) -f CMakeFiles/regiao.dir/build.make CMakeFiles/regiao.dir/regiao.cpp.i
+.PHONY : regiao.cpp.i
 
-regions.s: regions.cpp.s
+regiao.s: regiao.cpp.s
 
-.PHONY : regions.s
+.PHONY : regiao.s
 
 # target to generate assembly for a file
-regions.cpp.s:
-	$(MAKE) -f CMakeFiles/regions.dir/build.make CMakeFiles/regions.dir/regions.cpp.s
-.PHONY : regions.cpp.s
+regiao.cpp.s:
+	$(MAKE) -f CMakeFiles/regiao.dir/build.make CMakeFiles/regiao.dir/regiao.cpp.s
+.PHONY : regiao.cpp.s
 
 # Help Target
 help:
@@ -158,10 +158,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... regions"
-	@echo "... regions.o"
-	@echo "... regions.i"
-	@echo "... regions.s"
+	@echo "... regiao"
+	@echo "... regiao.o"
+	@echo "... regiao.i"
+	@echo "... regiao.s"
 .PHONY : help
 
 
