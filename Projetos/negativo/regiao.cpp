@@ -11,8 +11,10 @@ int main(int, char**){
 //carregando a imagem
 
 	image= imread("pp.png",CV_LOAD_IMAGE_GRAYSCALE); 
-	if(!image.data)
+	if(!image.data){
 		cout << "nao abriu pp.png" << endl;
+		return 0;
+	}
 
 //declarando variáveis para inserção dos pontos pelo usuário
 

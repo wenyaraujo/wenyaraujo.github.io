@@ -1,6 +1,10 @@
 :toc: left
-
+:linkattrs:
 :source-highlighter: pygments
+:figure-caption: Figura
+:listing-caption: Listagem
+:toc-title: Sumário
+[.text-justify]
 
 = 3ª Atividade: Identificando Bolhas.
 
