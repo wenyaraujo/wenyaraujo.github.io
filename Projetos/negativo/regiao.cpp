@@ -18,7 +18,7 @@ int main(int, char**){
 
 	int x1, y1, x2, y2;
 
-//atribuindo, através do "Do", os pontos informados 
+//atribuindo, através do "Do-while", os pontos informados 
 //pelo usuário nas variáveis.
 
 //o "while" está para que as variáveis façam uma varredura 
