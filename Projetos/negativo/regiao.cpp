@@ -61,7 +61,7 @@ int main(int, char**){
 	for(int i=x1; i<x2; i++){
 		for(int j=y1; j<y2; j++){
 			image.at<uchar>(i,j)=255-image.at<uchar>(i,j); //nesta linha ocorre a aplicação do negativo. 
-											//"255" menos o valor do pixel alocado.
+							//"255" menos o valor do pixel alocado.
 		}
 	}
 
