@@ -15,13 +15,13 @@ Trocando regiões da imagem, utilizando funções da biblioteca OpenCV.
 
 === 3ª Atividade: link:bolhas/bolhas.html[Identificando Bolhas].
 
-Foi implementado um algoritmo que identificasse objetos presentes em uma imagem, contando e verificando quais destes continham "buracos", utilizando a função FloodFill do OpenCV. 
+Foi implementado um algoritmo que identificasse objetos presentes em uma imagem, contando e verificando quais destes continham "buracos", utilizando a função FloodFill do OpenCV.
 
-=== 4ª Atividade: [Equalizador de histograma]
+=== 4ª Atividade: link:histograma/histograma.html[Equalizador de histograma]
 
 A atividade propõe equalizar o histograma de uma imagem (em tempo real) utilizando uma webcam. O programa retorna uma janela com a imagem com seus níveis equalizados.
 
-=== 5ª Atividade: [Detector de Movimento]
+=== 5ª Atividade: link:detector_movimento/movimento.html[Detector de Movimento]
 
 A tarefa utiliza de uma comparação entre histogramas atual e anterior a fim de visualizar se houve movimentação de acordo com as mudanças de níveis.
 
@@ -31,4 +31,4 @@ Aperfeiçoamos um algoritmo mostrado pelo professor para que este acrescente o c
 
 === 7ª Atividade: [Tilt-Shift]
 
-É possível simular miniaturas com imagens e filmes em tamanho real. Esta técnica é chamada de Tilt-Shift. 
+É possível simular miniaturas com imagens e filmes em tamanho real. Esta técnica é chamada de Tilt-Shift.

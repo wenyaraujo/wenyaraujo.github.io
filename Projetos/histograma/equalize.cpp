@@ -22,11 +22,12 @@ int main(int argc, char** argv){
   	Mat histImage (hist_h, hist_w, CV_8UC1, Scalar(0));			//Inicializando as imagens que apresentarão os histogramas
   	Mat histImage2(hist_h, hist_w, CV_8UC1, Scalar(0));
 
+    //Abertura da webcam
   	VideoCapture cap;
   	cap.open(0);
 
   	if(!cap.isOpened()){
-    	cout << "deu ruim";
+    	cout << "Erro ao abrir a câmera.\n";
     	return -1;
     }
 
@@ -34,7 +35,7 @@ int main(int argc, char** argv){
 
    		cap >> image;
    		flip(image,image,1);  									//espelhar a tela pra deixar a visualização mais fiel da realidade
-   		cvtColor(image,image,CV_BGR2GRAY); 						//Convertendo RGB para Escala de Cinza
+        cvtColor(image,image,CV_BGR2GRAY); 						//Convertendo RGB para Escala de Cinza
    		equalizeHist(image, saida); 							//Função do opencv para equalizar o histograma
 
    		//Reinicializando as imagens dos histogramas

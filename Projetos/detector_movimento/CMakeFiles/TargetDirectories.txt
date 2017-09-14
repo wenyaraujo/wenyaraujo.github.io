@@ -1,0 +1,3 @@
+/home/felipe/github/wenyaraujo.github.io/Projetos/detector_movimento/CMakeFiles/edit_cache.dir
+/home/felipe/github/wenyaraujo.github.io/Projetos/detector_movimento/CMakeFiles/rebuild_cache.dir
+/home/felipe/github/wenyaraujo.github.io/Projetos/detector_movimento/CMakeFiles/detector_movimento.dir

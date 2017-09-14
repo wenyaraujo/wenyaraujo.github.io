@@ -1,0 +1,47 @@
+:toc: left
+:linkattrs:
+:source-highlighter: pygments
+:figure-caption: Figura
+:listing-caption: Listagem
+:toc-title: Sumário
+[.text-justify]
+
+= 5ª Atividade: Detector de Movimento
+
+== Introdução
+
+Detecção de movimento é um adendo importante no processamento digital de imagens. É necessário para monitorar e analisar ambientes em geral. A atividade se propõe a implementar um programa que tenha a capacidade de detectar algum movimento a partir de imagens obtidas por uma webcam. As estratégias utilizadas para conseguir esse objetivo serão apresentadas a seguir.
+
+
+== Desenvolvimento da atividade
+
+A partir da análise e comparação de histograma é possível verificar se um objeto se movimentou em cena. A comparação é simples: uma vez que os níveis de cor ou tom de cinza entre duas imagens consecutivas apresentarem uma diferença significativa, isso pode ser interpretado como uma movimentação ocorrida na imagem capturada.
+
+No código abaixo podemos ver como o processo foi desenvolvido por meio de comentários.
+
+
+=== Código no OpenCV
+
+
+.detector_movimento.cpp
+[source,cpp,options="nowrap"]
+----
+include::detector_movimento.cpp[]
+----
+
+O programa trata-se basicamente da captura de duas imagens e a realização da comparação entre elas. A captura das imagens são separadas por um intervalo de 10 ms (através da função _usleep_). Com as imagens capturadas, o cálculo do histograma de ambas as imagens é feito pela função http://docs.opencv.org/2.4/modules/imgproc/doc/histograms.html?highlight=equalizehist#calchist[calcHist()].
+
+Com o histograma de cada uma, a comparação é então realizada pela função http://docs.opencv.org/2.4/modules/imgproc/doc/histograms.html?comparehist#comparehist[compareHist()]. Essa função retorna um número resultante de algum método de comparação entre os dados dos histogramas. Nesse programa, foi utilizado o método de correlação para a comparação.
+
+No método de correlação, quando duas imagens são iguais, o valor retornado pelo método é 1. E quando as imagens apressentam histogramas bem diferentes, o valor retornado é mais próximo de zero. Poderíamos então imaginar que, para detectar um movimento, basta testar se o valor retornado é diferente de 1, e então concluir que houve movimento. No entanto, isso não é aplicável devido à existência de ruído na captura da câmera, que faria o programa detectar movimento a todo momento, mesmo sem haver movimento.
+
+Assim, foi observado o valor médio retornado pela função enquanto a câmera apontava para uma cena imóvel. Esse valor encontrou-se por volta de 0.999. Com isso, a mensagem de movimentação é enviada apenas quando o resultado da comparação é menor que 0.999.
+
+=== Resultados
+
+O resultado obtido pode ser visualizado no seguinte vídeo:
+
+.Imagem capturada pela webcam
+image::./imagem original.png[640,256]
+
+O método de comparação de histogramas não é o mais eficiente para a detecção de movimentos, pois é necessário achar um valor ideal para o limiar que indica que houve movimento, sendo a determinação desse limiar bastante empírica. No entanto, para movimentos mais bruscos, o método funciona de maneira satisfatória.

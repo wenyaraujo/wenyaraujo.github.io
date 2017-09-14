@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+project( detector_movimento )
+set(OpenCV_DIR "/usr/local/opencv/share/OpenCV")
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+add_executable( detector_movimento detector_movimento.cpp )
+target_link_libraries( detector_movimento ${OpenCV_LIBS} )

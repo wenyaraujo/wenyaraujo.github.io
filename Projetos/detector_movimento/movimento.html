@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.6.1">
-<title>Projetos de PDI</title>
+<title>5ª Atividade: Detector de Movimento</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -424,21 +424,89 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style>
+<style>
+.listingblock .pygments .hll { background-color: #ffffcc }
+.listingblock .pygments, .listingblock .pygments code { background: #f8f8f8; }
+.listingblock .pygments .tok-c { color: #408080; font-style: italic } /* Comment */
+.listingblock .pygments .tok-err { border: 1px solid #FF0000 } /* Error */
+.listingblock .pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
+.listingblock .pygments .tok-o { color: #666666 } /* Operator */
+.listingblock .pygments .tok-ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.listingblock .pygments .tok-cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.listingblock .pygments .tok-cp { color: #BC7A00 } /* Comment.Preproc */
+.listingblock .pygments .tok-cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.listingblock .pygments .tok-c1 { color: #408080; font-style: italic } /* Comment.Single */
+.listingblock .pygments .tok-cs { color: #408080; font-style: italic } /* Comment.Special */
+.listingblock .pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
+.listingblock .pygments .tok-ge { font-style: italic } /* Generic.Emph */
+.listingblock .pygments .tok-gr { color: #FF0000 } /* Generic.Error */
+.listingblock .pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.listingblock .pygments .tok-gi { color: #00A000 } /* Generic.Inserted */
+.listingblock .pygments .tok-go { color: #888888 } /* Generic.Output */
+.listingblock .pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.listingblock .pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+.listingblock .pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.listingblock .pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
+.listingblock .pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.listingblock .pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.listingblock .pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.listingblock .pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
+.listingblock .pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.listingblock .pygments .tok-kt { color: #B00040 } /* Keyword.Type */
+.listingblock .pygments .tok-m { color: #666666 } /* Literal.Number */
+.listingblock .pygments .tok-s { color: #BA2121 } /* Literal.String */
+.listingblock .pygments .tok-na { color: #7D9029 } /* Name.Attribute */
+.listingblock .pygments .tok-nb { color: #008000 } /* Name.Builtin */
+.listingblock .pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.listingblock .pygments .tok-no { color: #880000 } /* Name.Constant */
+.listingblock .pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
+.listingblock .pygments .tok-ni { color: #999999; font-weight: bold } /* Name.Entity */
+.listingblock .pygments .tok-ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.listingblock .pygments .tok-nf { color: #0000FF } /* Name.Function */
+.listingblock .pygments .tok-nl { color: #A0A000 } /* Name.Label */
+.listingblock .pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.listingblock .pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
+.listingblock .pygments .tok-nv { color: #19177C } /* Name.Variable */
+.listingblock .pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.listingblock .pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
+.listingblock .pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
+.listingblock .pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
+.listingblock .pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
+.listingblock .pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
+.listingblock .pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
+.listingblock .pygments .tok-sa { color: #BA2121 } /* Literal.String.Affix */
+.listingblock .pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
+.listingblock .pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
+.listingblock .pygments .tok-dl { color: #BA2121 } /* Literal.String.Delimiter */
+.listingblock .pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.listingblock .pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
+.listingblock .pygments .tok-se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.listingblock .pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
+.listingblock .pygments .tok-si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.listingblock .pygments .tok-sx { color: #008000 } /* Literal.String.Other */
+.listingblock .pygments .tok-sr { color: #BB6688 } /* Literal.String.Regex */
+.listingblock .pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
+.listingblock .pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
+.listingblock .pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
+.listingblock .pygments .tok-fm { color: #0000FF } /* Name.Function.Magic */
+.listingblock .pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
+.listingblock .pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
+.listingblock .pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
+.listingblock .pygments .tok-vm { color: #19177C } /* Name.Variable.Magic */
+.listingblock .pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
+<h1>5ª Atividade: Detector de Movimento</h1>
 <div id="toc" class="toc2">
-<div id="toctitle">Table of Contents</div>
+<div id="toctitle">Sumário</div>
 <ul class="sectlevel1">
-<li><a href="#_projetos_de_pdi">Projetos de PDI</a>
+<li><a href="#_introdução">Introdução</a></li>
+<li><a href="#_desenvolvimento_da_atividade">Desenvolvimento da atividade</a>
 <ul class="sectlevel2">
-<li><a href="#_1ª_atividade_a_href_negativo_negativo_html_negativo_de_uma_imagem_a">1ª Atividade: <a href="negativo/negativo.html">Negativo de uma imagem</a>.</a></li>
-<li><a href="#_2ª_atividade_a_href_trocatroca_trocatroca_html_troca_regiões_a">2ª Atividade: <a href="trocatroca/trocatroca.html">Troca regiões</a>.</a></li>
-<li><a href="#_3ª_atividade_a_href_bolhas_bolhas_html_identificando_bolhas_a">3ª Atividade: <a href="bolhas/bolhas.html">Identificando Bolhas</a>.</a></li>
-<li><a href="#_4ª_atividade_a_href_histograma_histograma_html_equalizador_de_histograma_a">4ª Atividade: <a href="histograma/histograma.html">Equalizador de histograma</a></a></li>
-<li><a href="#_5ª_atividade_a_href_detector_movimento_movimento_html_detector_de_movimento_a">5ª Atividade: <a href="detector_movimento/movimento.html">Detector de Movimento</a></a></li>
-<li><a href="#_6ª_atividade_filtragem_espacial">6ª Atividade: [Filtragem Espacial]</a></li>
-<li><a href="#_7ª_atividade_tilt_shift">7ª Atividade: [Tilt-Shift]</a></li>
+<li><a href="#_código_no_opencv">Código no OpenCV</a></li>
+<li><a href="#_resultados">Resultados</a></li>
 </ul>
 </li>
 </ul>
@@ -446,54 +514,120 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_projetos_de_pdi">Projetos de PDI</h2>
+<h2 id="_introdução">Introdução</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Powered by Felipe Omar and Weny Vasconcelos &#169; 2017</p>
+<p>Detecção de movimento é um adendo importante no processamento digital de imagens. É necessário para monitorar e analisar ambientes em geral. A atividade se propõe a implementar um programa que tenha a capacidade de detectar algum movimento a partir de imagens obtidas por uma webcam. As estratégias utilizadas para conseguir esse objetivo serão apresentadas a seguir.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_desenvolvimento_da_atividade">Desenvolvimento da atividade</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A partir da análise e comparação de histograma é possível verificar se um objeto se movimentou em cena. A comparação é simples: uma vez que os níveis de cor ou tom de cinza entre duas imagens consecutivas apresentarem uma diferença significativa, isso pode ser interpretado como uma movimentação ocorrida na imagem capturada.</p>
 </div>
 <div class="paragraph">
-<p>Seja bem vindo(a)! Aqui você pode encontrar todos os projetos desenvolvidos e em desenvolvimento por nós na disciplina de <strong>Processamento Digital de Imagens</strong>, promovida pelo Departamento de Computação e Automação, Centro de Tecnologia, Universidade Federal do Rio Grande do Norte.</p>
+<p>No código abaixo podemos ver como o processo foi desenvolvido por meio de comentários.</p>
 </div>
 <div class="sect2">
-<h3 id="_1ª_atividade_a_href_negativo_negativo_html_negativo_de_uma_imagem_a">1ª Atividade: <a href="negativo/negativo.html">Negativo de uma imagem</a>.</h3>
+<h3 id="_código_no_opencv">Código no OpenCV</h3>
+<div class="listingblock">
+<div class="title">Listagem 1. detector_movimento.cpp</div>
+<div class="content">
+<pre class="pygments highlight nowrap"><code data-lang="cpp"><span></span><span class="tok-cp">#include</span> <span class="tok-cpf">&lt;iostream&gt;</span><span class="tok-cp"></span>
+<span class="tok-cp">#include</span> <span class="tok-cpf">&lt;unistd.h&gt;</span><span class="tok-cp"></span>
+<span class="tok-cp">#include</span> <span class="tok-cpf">&lt;opencv2/opencv.hpp&gt;</span><span class="tok-cp"></span>
+
+<span class="tok-k">using</span> <span class="tok-k">namespace</span> <span class="tok-n">cv</span><span class="tok-p">;</span>
+<span class="tok-k">using</span> <span class="tok-k">namespace</span> <span class="tok-n">std</span><span class="tok-p">;</span>
+
+<span class="tok-kt">int</span> <span class="tok-nf">main</span><span class="tok-p">(</span><span class="tok-kt">int</span> <span class="tok-n">argc</span><span class="tok-p">,</span> <span class="tok-kt">char</span><span class="tok-o">**</span> <span class="tok-n">argv</span><span class="tok-p">){</span>
+  	<span class="tok-n">Mat</span> <span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">image2</span><span class="tok-p">;</span>
+
+  	<span class="tok-c1">//Variáveis necessárias para a construção do histograma</span>
+  	<span class="tok-kt">int</span> 		 <span class="tok-n">histSize</span> 	<span class="tok-o">=</span> <span class="tok-mi">64</span><span class="tok-p">;</span>                   <span class="tok-c1">//Número de subdivisões horizontais</span>
+  	<span class="tok-kt">float</span> 		 <span class="tok-n">range</span><span class="tok-p">[]</span> 	<span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-mi">256</span> <span class="tok-p">};</span>           <span class="tok-c1">//Limites inferior e superior do histograma</span>
+  	<span class="tok-k">const</span> <span class="tok-kt">float</span><span class="tok-o">*</span> <span class="tok-n">histRange</span> 	<span class="tok-o">=</span> <span class="tok-p">{</span> <span class="tok-n">range</span> <span class="tok-p">};</span>
+  	<span class="tok-n">Mat</span> <span class="tok-n">histograma</span><span class="tok-p">,</span> <span class="tok-n">histograma2</span><span class="tok-p">;</span>                    <span class="tok-c1">//Objeto onde o histograma será armazenado</span>
+
+
+  	<span class="tok-kt">double</span> <span class="tok-n">alert</span><span class="tok-p">,</span> <span class="tok-n">media</span><span class="tok-p">;</span>
+
+  	<span class="tok-n">VideoCapture</span> <span class="tok-n">cap</span><span class="tok-p">;</span>
+  	<span class="tok-n">cap</span><span class="tok-p">.</span><span class="tok-n">open</span><span class="tok-p">(</span><span class="tok-mi">0</span><span class="tok-p">);</span>
+
+  	<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-o">!</span><span class="tok-n">cap</span><span class="tok-p">.</span><span class="tok-n">isOpened</span><span class="tok-p">()){</span>
+    	<span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot;Erro de abertura da webcam.&quot;</span><span class="tok-p">;</span>
+    	<span class="tok-k">return</span> <span class="tok-o">-</span><span class="tok-mi">1</span><span class="tok-p">;</span>
+    <span class="tok-p">}</span>
+
+	<span class="tok-k">while</span><span class="tok-p">(</span><span class="tok-mi">1</span><span class="tok-p">){</span>
+
+   		<span class="tok-n">cap</span> <span class="tok-o">&gt;&gt;</span> <span class="tok-n">image</span><span class="tok-p">;</span>
+   		<span class="tok-n">flip</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">);</span>                          <span class="tok-c1">//espelhar a tela pra deixar a visualização mais fiel da realidade</span>
+   		<span class="tok-n">cvtColor</span><span class="tok-p">(</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">image</span><span class="tok-p">,</span><span class="tok-n">CV_BGR2GRAY</span><span class="tok-p">);</span>            <span class="tok-c1">//Convertendo RGB para Escala de Cinza</span>
+   		<span class="tok-n">usleep</span><span class="tok-p">(</span><span class="tok-mi">10000</span><span class="tok-p">);</span>                                <span class="tok-c1">//10ms delay</span>
+
+   		<span class="tok-n">cap</span> <span class="tok-o">&gt;&gt;</span> <span class="tok-n">image2</span><span class="tok-p">;</span>
+   		<span class="tok-n">flip</span><span class="tok-p">(</span><span class="tok-n">image2</span><span class="tok-p">,</span><span class="tok-n">image2</span><span class="tok-p">,</span><span class="tok-mi">1</span><span class="tok-p">);</span>                        <span class="tok-c1">//espelhar a tela pra deixar a visualização mais fiel da realidade</span>
+   		<span class="tok-n">cvtColor</span><span class="tok-p">(</span><span class="tok-n">image2</span><span class="tok-p">,</span><span class="tok-n">image2</span><span class="tok-p">,</span><span class="tok-n">CV_BGR2GRAY</span><span class="tok-p">);</span>          <span class="tok-c1">//Convertendo RGB para Escala de Cinza</span>
+
+   		<span class="tok-c1">//Reinicializando as imagens dos histogramas</span>
+   		<span class="tok-n">histImage</span><span class="tok-p">.</span><span class="tok-n">setTo</span><span class="tok-p">(</span> <span class="tok-n">Scalar</span><span class="tok-p">(</span><span class="tok-mi">0</span><span class="tok-p">));</span>
+   		<span class="tok-n">histImage2</span><span class="tok-p">.</span><span class="tok-n">setTo</span><span class="tok-p">(</span><span class="tok-n">Scalar</span><span class="tok-p">(</span><span class="tok-mi">0</span><span class="tok-p">));</span>
+
+   		<span class="tok-c1">//Calculando o histograma das imagens</span>
+   		<span class="tok-n">calcHist</span><span class="tok-p">(</span><span class="tok-o">&amp;</span><span class="tok-n">image</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">Mat</span><span class="tok-p">(),</span> <span class="tok-n">histograma</span> <span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-p">,</span> <span class="tok-o">&amp;</span><span class="tok-n">histSize</span><span class="tok-p">,</span> <span class="tok-o">&amp;</span><span class="tok-n">histRange</span><span class="tok-p">,</span> <span class="tok-nb">true</span><span class="tok-p">,</span> <span class="tok-nb">false</span><span class="tok-p">);</span>
+   		<span class="tok-n">calcHist</span><span class="tok-p">(</span><span class="tok-o">&amp;</span><span class="tok-n">image2</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-p">,</span> <span class="tok-mi">0</span><span class="tok-p">,</span> <span class="tok-n">Mat</span><span class="tok-p">(),</span> <span class="tok-n">histograma2</span><span class="tok-p">,</span> <span class="tok-mi">1</span><span class="tok-p">,</span> <span class="tok-o">&amp;</span><span class="tok-n">histSize</span><span class="tok-p">,</span> <span class="tok-o">&amp;</span><span class="tok-n">histRange</span><span class="tok-p">,</span> <span class="tok-nb">true</span><span class="tok-p">,</span> <span class="tok-nb">false</span><span class="tok-p">);</span>
+
+      <span class="tok-c1">//Realizando a comparação entre os dois histogramas obtidos</span>
+   		<span class="tok-n">alert</span> <span class="tok-o">=</span> <span class="tok-n">compareHist</span><span class="tok-p">(</span><span class="tok-n">histograma</span><span class="tok-p">,</span> <span class="tok-n">histograma2</span><span class="tok-p">,</span><span class="tok-n">CV_COMP_CORREL</span><span class="tok-p">);</span>
+
+      <span class="tok-c1">//Definição do limiar de diferença entre os histogramas</span>
+   		<span class="tok-n">media</span> <span class="tok-o">=</span> <span class="tok-mf">0.999</span><span class="tok-p">;</span>
+
+      <span class="tok-c1">//Apresentação dos resultados</span>
+      <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">alert</span> <span class="tok-o">&lt;</span> <span class="tok-n">media</span><span class="tok-p">)</span>
+        <span class="tok-n">cout</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">alert</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-s">&quot; MOVIMENTO&quot;</span> <span class="tok-o">&lt;&lt;</span> <span class="tok-n">endl</span><span class="tok-p">;</span>
+
+      <span class="tok-n">namedWindow</span><span class="tok-p">(</span><span class="tok-s">&quot;entrada&quot;</span><span class="tok-p">,</span> <span class="tok-n">CV_WINDOW_KEEPRATIO</span><span class="tok-p">);</span>
+      <span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;entrada&quot;</span><span class="tok-p">,</span> <span class="tok-n">image</span><span class="tok-p">);</span>
+	  <span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">waitKey</span><span class="tok-p">(</span><span class="tok-mi">10</span><span class="tok-p">)</span> <span class="tok-o">&gt;=</span> <span class="tok-mi">0</span><span class="tok-p">)</span> <span class="tok-k">break</span><span class="tok-p">;</span>
+	<span class="tok-p">}</span>
+
+  	<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;saida.png&quot;</span><span class="tok-p">,</span><span class="tok-n">image2</span><span class="tok-p">);</span>
+  	<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;entrada.png&quot;</span><span class="tok-p">,</span><span class="tok-n">image</span><span class="tok-p">);</span>
+  	<span class="tok-k">return</span> <span class="tok-mi">0</span><span class="tok-p">;</span>
+<span class="tok-p">}</span></code></pre>
+</div>
+</div>
 <div class="paragraph">
-<p>Região de imagens sendo negativadas por interação do usuário.</p>
+<p>O programa trata-se basicamente da captura de duas imagens e a realização da comparação entre elas. A captura das imagens são separadas por um intervalo de 10 ms (através da função <em>usleep</em>). Com as imagens capturadas, o cálculo do histograma de ambas as imagens é feito pela função <a href="http://docs.opencv.org/2.4/modules/imgproc/doc/histograms.html?highlight=equalizehist#calchist">calcHist()</a>.</p>
+</div>
+<div class="paragraph">
+<p>Com o histograma de cada uma, a comparação é então realizada pela função <a href="http://docs.opencv.org/2.4/modules/imgproc/doc/histograms.html?comparehist#comparehist">compareHist()</a>. Essa função retorna um número resultante de algum método de comparação entre os dados dos histogramas. Nesse programa, foi utilizado o método de correlação para a comparação.</p>
+</div>
+<div class="paragraph">
+<p>No método de correlação, quando duas imagens são iguais, o valor retornado pelo método é 1. E quando as imagens apressentam histogramas bem diferentes, o valor retornado é mais próximo de zero. Poderíamos então imaginar que, para detectar um movimento, basta testar se o valor retornado é diferente de 1, e então concluir que houve movimento. No entanto, isso não é aplicável devido à existência de ruído na captura da câmera, que faria o programa detectar movimento a todo momento, mesmo sem haver movimento.</p>
+</div>
+<div class="paragraph">
+<p>Assim, foi observado o valor médio retornado pela função enquanto a câmera apontava para uma cena imóvel. Esse valor encontrou-se por volta de 0.999. Com isso, a mensagem de movimentação é enviada apenas quando o resultado da comparação é menor que 0.999.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_2ª_atividade_a_href_trocatroca_trocatroca_html_troca_regiões_a">2ª Atividade: <a href="trocatroca/trocatroca.html">Troca regiões</a>.</h3>
+<h3 id="_resultados">Resultados</h3>
 <div class="paragraph">
-<p>Trocando regiões da imagem, utilizando funções da biblioteca OpenCV.</p>
+<p>O resultado obtido pode ser visualizado no seguinte vídeo:</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="./imagem%20original.png" alt="640" width="256">
 </div>
-<div class="sect2">
-<h3 id="_3ª_atividade_a_href_bolhas_bolhas_html_identificando_bolhas_a">3ª Atividade: <a href="bolhas/bolhas.html">Identificando Bolhas</a>.</h3>
+<div class="title">Figura 1. Imagem capturada pela webcam</div>
+</div>
 <div class="paragraph">
-<p>Foi implementado um algoritmo que identificasse objetos presentes em uma imagem, contando e verificando quais destes continham "buracos", utilizando a função FloodFill do OpenCV.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_4ª_atividade_a_href_histograma_histograma_html_equalizador_de_histograma_a">4ª Atividade: <a href="histograma/histograma.html">Equalizador de histograma</a></h3>
-<div class="paragraph">
-<p>A atividade propõe equalizar o histograma de uma imagem (em tempo real) utilizando uma webcam. O programa retorna uma janela com a imagem com seus níveis equalizados.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_5ª_atividade_a_href_detector_movimento_movimento_html_detector_de_movimento_a">5ª Atividade: <a href="detector_movimento/movimento.html">Detector de Movimento</a></h3>
-<div class="paragraph">
-<p>A tarefa utiliza de uma comparação entre histogramas atual e anterior a fim de visualizar se houve movimentação de acordo com as mudanças de níveis.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_6ª_atividade_filtragem_espacial">6ª Atividade: [Filtragem Espacial]</h3>
-<div class="paragraph">
-<p>Aperfeiçoamos um algoritmo mostrado pelo professor para que este acrescente o cálculo do laplaciando do gaussiano às imagens capturadas, comparando-o com o resultado do filtro laplaciano apenas.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_7ª_atividade_tilt_shift">7ª Atividade: [Tilt-Shift]</h3>
-<div class="paragraph">
-<p>É possível simular miniaturas com imagens e filmes em tamanho real. Esta técnica é chamada de Tilt-Shift.</p>
+<p>O método de comparação de histogramas não é o mais eficiente para a detecção de movimentos, pois é necessário achar um valor ideal para o limiar que indica que houve movimento, sendo a determinação desse limiar bastante empírica. No entanto, para movimentos mais bruscos, o método funciona de maneira satisfatória.</p>
 </div>
 </div>
 </div>
@@ -501,7 +635,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-09-14 16:09:50 BRT
+Last updated 2017-09-14 16:07:46 BRT
 </div>
 </div>
 </body>
