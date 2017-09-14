@@ -1,0 +1,61 @@
+:toc: left
+:linkattrs:
+:source-highlighter: pygments
+:figure-caption: Figura
+:listing-caption: Listagem
+:toc-title: Sumário
+[.text-justify]
+
+= 6ª Atividade: Filtragem Espacial
+
+== Introdução
+
+A filtragem é um processo bastante útil na transformação de imagens, com o intuito de melhorar a qualidade da imagem, ou destacar características da mesma. Essa atividade se propõe a expor alguns tipos de filtragem, capturando a imagem fornecida pela webcam e apresentando o resultado de um tipo de filtragem na tela do computador. Serão aplicadas diferentes filtragens, a cada uma será escolhida através do pressionamento de uma tecla específica.
+
+== Desenvolvimento da atividade
+
+O código implementado baseia-se em apenas identificar a última tecla pressionada pelo usuário e, a partir disso, aplicar um determinado filtro até que outra tecla seja pressionada. A aplicação dos filtros se baseiam na realização de uma convolução de uma imagem com uma matriz, e cada tipo de filtro possui uma matriz característica. Dessa forma, as matrizes são definidas no código e então, usando as ferramentas oferecidas pelo OpenCV, realiza-se a filtragem da imagem.
+
+O programa também irá implementar a aplicação de de um filtro após o outro. No caso, será feita a filtragem de uma imagem com o filtro gaussiano, e então será aplicado o filtro laplaciano a esse resultado.
+
+
+=== Código no OpenCV
+
+O código implementado pode ser visto a seguir:
+
+.equalize.cpp
+[source,cpp,options="nowrap"]
+----
+include::filtros.cpp[]
+----
+
+O código está sempre verificando o pressionamento de uma tecla para mudar o tipo de filtro a ser aplicado. Tendo a escolha do filtro realizada, o código entra em um loop de captura, aplicação do filtro e exibição do resultado, até que outra tecla seja pressionada.
+
+Para a realização da filtragem, utilizou-se a função http://docs.opencv.org/2.4/modules/imgproc/doc/filtering.html#filter2d[filter2D()]. Essa função recebe como argumento a imagem a ser processada, a matriz de convolução, onde o resultado será armazenado, etc. Para mais informações, consultar a documentação do OpenCV. E, para a criação da matriz de convolução, também foi usada a função [scaleAdd]. Assim, a diferença entre cada tipo de filtro é apenas a fonte de dados para a criação da matriz de convolução. Também é utlizada a opção de calcular o valor absoludo do resultado, que deixa alguns detalhes mais notáveis.
+
+
+=== Resultados
+
+Podemos ver o resultado da aplicação dos filtros a seguir:
+
+.Filtro Gaussiano
+image::./gaussiano.png[320,320]
+
+.Filtro da média
+image::./media.png[320,320]
+
+.Filtro Borda Horizontal
+image::./horizontal.png[320,320]
+
+.Filtro Borda Vertical
+image::./vertical.png[320,320]
+
+.Filtro Laplaciano
+image::./laplaciano.png[320,320]
+
+.Filtro Laplaciano do Gaussiano
+image::./gaussiano.png[320,320]
+
+Podemos então observar que cada filtro destaca diferentes características de uma imagem, desde realizar a suavização de uma imagem até detectar bordas que ocorram na mesma. Para o caso onde é aplicado um filtro após o outro (Laplaciano do Gaussiano, por exemplo), vê-se que as característica de ambos os filtros se mantém. Isso pode ser útil para diversas aplicações, onde podemos combinar características de filtros para obter um resultado desejado.
+
+No caso do filtro Laplaciano do Gaussiano, obtemos a vantagem de ter uma imagem mais suavizada. Quando aplicamos apenas o filtro laplaciano isolado, as bordas são detectadas, mas com um certo nível de ruídos. Quando é aplicado uma suavização antes (filtro Gaussiano), o resultado do Laplaciano torna-se mais "limpo", sem muito ruído, aumentando assim a qualidade da filtragem.

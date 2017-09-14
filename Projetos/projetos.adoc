@@ -25,7 +25,7 @@ A atividade propõe equalizar o histograma de uma imagem (em tempo real) utiliza
 
 A tarefa utiliza de uma comparação entre histogramas atual e anterior a fim de visualizar se houve movimentação de acordo com as mudanças de níveis.
 
-=== 6ª Atividade: [Filtragem Espacial]
+=== 6ª Atividade: link:filtros/filtros.html[Filtragem Espacial]
 
 Aperfeiçoamos um algoritmo mostrado pelo professor para que este acrescente o cálculo do laplaciando do gaussiano às imagens capturadas, comparando-o com o resultado do filtro laplaciano apenas.
 
