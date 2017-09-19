@@ -29,6 +29,6 @@ A tarefa utiliza de uma comparação entre histogramas atual e anterior a fim de
 
 Aperfeiçoamos um algoritmo mostrado pelo professor para que este acrescente o cálculo do laplaciando do gaussiano às imagens capturadas, comparando-o com o resultado do filtro laplaciano apenas.
 
-=== 7ª Atividade: [Tilt-Shift]
+=== 7ª Atividade: link:tiltshift/tiltshift.html[Tilt-Shift]
 
 É possível simular miniaturas com imagens e filmes em tamanho real. Esta técnica é chamada de Tilt-Shift.

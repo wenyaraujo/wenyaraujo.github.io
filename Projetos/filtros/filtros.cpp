@@ -88,6 +88,9 @@ int main(int argvc, char** argv){
   					frameFiltered.convertTo(result, CV_8U);
   					imshow("Original", frame);
   					imshow("Filtro", result);
+
+  					imwrite("filtro_media_entrada.png",frame);
+  					imwrite("filtro_media_saida.png",result);
   					
   					//Leitura do teclado
   					key = (char) waitKey(10);
@@ -120,6 +123,9 @@ int main(int argvc, char** argv){
   					frameFiltered.convertTo(result, CV_8U);
   					imshow("Original", frame);
   					imshow("Filtro", result);
+
+  					imwrite("filtro_gaussiano_entrada.png",frame);
+  					imwrite("filtro_gaussiano_saida.png",result);
   					
   					//Leitura do teclado
   					key = (char) waitKey(10);
@@ -151,6 +157,9 @@ int main(int argvc, char** argv){
   					imshow("Original", frame);
   					imshow("Filtro", result);
   					
+  					imwrite("filtro_horizontal_entrada.png",frame);
+  					imwrite("filtro_horizontal_saida.png",result);
+
   					//Leitura do teclado
   					key = (char) waitKey(10);
   					if(key == 'm' || key == 'g' || key == 'v' || key == 'l' || key == 'j') break;
@@ -180,6 +189,9 @@ int main(int argvc, char** argv){
   					frameFiltered.convertTo(result, CV_8U);
   					imshow("Original", frame);
   					imshow("Filtro", result);
+
+  					imwrite("filtro_vertical_entrada.png",frame);
+  					imwrite("filtro_vertical_saida.png",result);
   					
   					//Leitura do teclado
   					key = (char) waitKey(10);
@@ -214,6 +226,9 @@ int main(int argvc, char** argv){
   					imshow("Original", frame);
   					imshow("Filtro", result);
   					
+  					imwrite("filtro_laplaciano_entrada.png",frame);
+  					imwrite("filtro_laplaciano_saida.png",result);
+
   					//Leitura do teclado
   					key = (char) waitKey(10);
   					if(key == 'm' || key == 'g' || key == 'h' || key == 'v' || key == 'j') break;
@@ -252,6 +267,9 @@ int main(int argvc, char** argv){
   					//result = result + abs(min);
   					imshow("Original", frame);
   					imshow("Filtro", result);
+
+  					imwrite("filtro_lapl_gaussiano_entrada.png",frame);
+  					imwrite("filtro_lapl_gaussiano_saida.png",result);
   					
   					//Leitura do teclado
   					key = (char) waitKey(10);

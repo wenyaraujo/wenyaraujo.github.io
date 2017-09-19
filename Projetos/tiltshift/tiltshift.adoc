@@ -1,0 +1,33 @@
+:toc: left
+:linkattrs:
+:source-highlighter: pygments
+:figure-caption: Figura
+:listing-caption: Listagem
+:toc-title: Sumário
+[.text-justify]
+
+= 7ª Atividade: Tilt-Shift
+
+== Introdução
+
+Em desenvolvimento...
+
+== Desenvolvimento da atividade
+
+Em desenvolvimento...
+
+=== Código no OpenCV
+
+Em desenvolvimento...
+
+.tiltshift.cpp
+[source,cpp,options="nowrap"]
+----
+include::tiltshift.cpp[]
+----
+
+
+
+=== Resultados
+
+Em desenvolvimento...

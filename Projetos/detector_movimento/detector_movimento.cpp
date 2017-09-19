@@ -13,7 +13,7 @@ int main(int argc, char** argv){
   	float 		 range[] 	= { 0, 256 };           //Limites inferior e superior do histograma
   	const float* histRange 	= { range };
   	Mat histograma, histograma2;                    //Objeto onde o histograma será armazenado
-
+  	Mat histImage,histImage2;
 
   	double alert, media;
 

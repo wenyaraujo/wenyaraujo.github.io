@@ -39,6 +39,8 @@ Assim, foi observado o valor médio retornado pela função enquanto a câmera a
 
 === Resultados
 
+Em desenvolvimento...
+
 O resultado obtido pode ser visualizado no seguinte vídeo:
 
 .Imagem capturada pela webcam

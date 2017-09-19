@@ -4,7 +4,7 @@
 :figure-caption: Figura
 :listing-caption: Listagem
 :toc-title: Sumário
-[.text-justify]	
+[.text-justify]
 
 = 4ª Atividade: Equalizador de histograma
 
@@ -12,7 +12,7 @@
 
 O histograma é uma ferramenta muito importante usada para avaliar o comportamento de uma imagem. Quando precisamos identificar quantas ocorrencias - de pixels - existem em cada nível (de tom de cinza ou de cor - RBG). Podemos ver na seguite figura, o exemplo de um histograma:
 
-.Exemplo de um histograma 
+.Exemplo de um histograma
 image::./histograma.jpg[512, 512]
 
 A partir do conhecimento do histograma de uma imagem, podemos analisar algumas características da imagem e, mais que isso, realizar alguns tipos de modificações que melhoram a qualidade da imagem. Dentre as modificações que podemos realizar, uma bastante comum é a equalização do histograma, que acarreta em efeitos que iremos analisar nessa atividade.
@@ -22,7 +22,7 @@ A partir do conhecimento do histograma de uma imagem, podemos analisar algumas c
 A atividade propõe mostrar o processo de capturar imagens de uma webcam instalada no computador, calcular os histogramas em tons de cinza e desenhá-los no canto superior esquerdo da imagem capturada. Além disso, em outra janela de exibição, mostrar como cada imagem capturada ficaria com seu histograma equalizado.
 
 Podemos ver o resultado esperado nas seguintes figuras, onde podemos observar as diferenças entre uma imagem e sua versão com o histograma equalizado. No canto superior esquerdo podemos ver o histograma de cada imagem.
- 
+
 .Imagem capturada original
 image::./low-contrast.png[512,512]
 
@@ -54,20 +54,22 @@ Após a equalização da imagem, é então calculado o histograma da imagem orig
 
 === Resultados
 
+Em desenvolvimento...
+
 Com a execução do código, a imagem capturada pela webcam passa a ser apresentada em uma janela, e o resultado da equalização é apresentada em outra janela. Podemos um exemplo da imagem resultante a seguir:
 
 .Imagem capturada pela webcam
-image::./imagem original.png[640,256]
+image::./imagem_original.png[640,256]
 
 .Imagem com histograma equalizado
-image::./imagem equalizada.png[640,256]
+image::./imagem_equalizada.png[640,256]
 
 Com isso, podemos perceber que os efeitos da equalização foram obtidos com sucesso, sendo possível observar claramente a diferença entre o histograma da imagem original e da imagem processada.
 
 Dependendo da iluminação do local, a equalização pode ser pouco perceptível, pois o histograma da imagem original já está bem distribuída ao longo de todos os tons de cinza. Podemos ver isso a seguir:
 
 .Imagem capturada pela webcam
-image::./imagem original.png[640,256]
+image::./imagem_original2.png[640,256]
 
 .Imagem com histograma equalizado
-image::./imagem equalizada.png[640,256]
+image::./imagem_equalizada2.png[640,256]

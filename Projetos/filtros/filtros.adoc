@@ -38,23 +38,36 @@ Para a realização da filtragem, utilizou-se a função http://docs.opencv.org/
 
 Podemos ver o resultado da aplicação dos filtros a seguir:
 
-.Filtro Gaussiano
-image::./gaussiano.png[320,320]
+[.float-group]
+--
+[.center]
+.Entrada dos filtros.
+image::./filtro_media_entrada.png[450,450]
+[.center]
+.Saída do filtro da média.
+image::./filtro_media_saida.png[450,450]
 
-.Filtro da média
-image::./media.png[320,320]
+[.center]
+.Saída do filtro Gaussiano.
+image::./filtro_gaussiano_saida.png[450,450]
 
-.Filtro Borda Horizontal
-image::./horizontal.png[320,320]
+[.center]
+.Saída do filtro de borda vertical.
+image::./filtro_vertical_saida.png[450,450]
 
-.Filtro Borda Vertical
-image::./vertical.png[320,320]
+[.center]
+.Saída do filtro de borda horizontal.
+image::./filtro_horizontal_saida.png[450,450]
 
-.Filtro Laplaciano
-image::./laplaciano.png[320,320]
+[.center]
+.Saída do filtro laplaciano.
+image::./filtro_laplaciano_saida.png[450,450]
 
-.Filtro Laplaciano do Gaussiano
-image::./gaussiano.png[320,320]
+[.center]
+.Saída do filtro laplaciano do gaussiano.
+image::./filtro_media_saida.png[450,450]
+--
+
 
 Podemos então observar que cada filtro destaca diferentes características de uma imagem, desde realizar a suavização de uma imagem até detectar bordas que ocorram na mesma. Para o caso onde é aplicado um filtro após o outro (Laplaciano do Gaussiano, por exemplo), vê-se que as característica de ambos os filtros se mantém. Isso pode ser útil para diversas aplicações, onde podemos combinar características de filtros para obter um resultado desejado.
 

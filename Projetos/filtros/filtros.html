@@ -629,6 +629,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   					<span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Original&quot;</span><span class="tok-p">,</span> <span class="tok-n">frame</span><span class="tok-p">);</span>
   					<span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Filtro&quot;</span><span class="tok-p">,</span> <span class="tok-n">result</span><span class="tok-p">);</span>
 
+  					<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;filtro_media_entrada.png&quot;</span><span class="tok-p">,</span><span class="tok-n">frame</span><span class="tok-p">);</span>
+  					<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;filtro_media_saida.png&quot;</span><span class="tok-p">,</span><span class="tok-n">result</span><span class="tok-p">);</span>
+
   					<span class="tok-c1">//Leitura do teclado</span>
   					<span class="tok-n">key</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-kt">char</span><span class="tok-p">)</span> <span class="tok-n">waitKey</span><span class="tok-p">(</span><span class="tok-mi">10</span><span class="tok-p">);</span>
   					<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">key</span> <span class="tok-o">==</span> <span class="tok-sc">&#39;g&#39;</span> <span class="tok-o">||</span> <span class="tok-n">key</span> <span class="tok-o">==</span> <span class="tok-sc">&#39;h&#39;</span> <span class="tok-o">||</span> <span class="tok-n">key</span> <span class="tok-o">==</span> <span class="tok-sc">&#39;v&#39;</span> <span class="tok-o">||</span> <span class="tok-n">key</span> <span class="tok-o">==</span> <span class="tok-sc">&#39;l&#39;</span> <span class="tok-o">||</span> <span class="tok-n">key</span> <span class="tok-o">==</span> <span class="tok-sc">&#39;j&#39;</span><span class="tok-p">)</span> <span class="tok-k">break</span><span class="tok-p">;</span>
@@ -661,6 +664,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   					<span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Original&quot;</span><span class="tok-p">,</span> <span class="tok-n">frame</span><span class="tok-p">);</span>
   					<span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Filtro&quot;</span><span class="tok-p">,</span> <span class="tok-n">result</span><span class="tok-p">);</span>
 
+  					<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;filtro_gaussiano_entrada.png&quot;</span><span class="tok-p">,</span><span class="tok-n">frame</span><span class="tok-p">);</span>
+  					<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;filtro_gaussiano_saida.png&quot;</span><span class="tok-p">,</span><span class="tok-n">result</span><span class="tok-p">);</span>
+
   					<span class="tok-c1">//Leitura do teclado</span>
   					<span class="tok-n">key</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-kt">char</span><span class="tok-p">)</span> <span class="tok-n">waitKey</span><span class="tok-p">(</span><span class="tok-mi">10</span><span class="tok-p">);</span>
   					<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">key</span> <span class="tok-o">==</span> <span class="tok-sc">&#39;m&#39;</span> <span class="tok-o">||</span> <span class="tok-n">key</span> <span class="tok-o">==</span> <span class="tok-sc">&#39;h&#39;</span> <span class="tok-o">||</span> <span class="tok-n">key</span> <span class="tok-o">==</span> <span class="tok-sc">&#39;v&#39;</span> <span class="tok-o">||</span> <span class="tok-n">key</span> <span class="tok-o">==</span> <span class="tok-sc">&#39;l&#39;</span> <span class="tok-o">||</span> <span class="tok-n">key</span> <span class="tok-o">==</span> <span class="tok-sc">&#39;j&#39;</span><span class="tok-p">)</span> <span class="tok-k">break</span><span class="tok-p">;</span>
@@ -691,6 +697,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   					<span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Original&quot;</span><span class="tok-p">,</span> <span class="tok-n">frame</span><span class="tok-p">);</span>
   					<span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Filtro&quot;</span><span class="tok-p">,</span> <span class="tok-n">result</span><span class="tok-p">);</span>
 
+  					<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;filtro_horizontal_entrada.png&quot;</span><span class="tok-p">,</span><span class="tok-n">frame</span><span class="tok-p">);</span>
+  					<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;filtro_horizontal_saida.png&quot;</span><span class="tok-p">,</span><span class="tok-n">result</span><span class="tok-p">);</span>
+
   					<span class="tok-c1">//Leitura do teclado</span>
   					<span class="tok-n">key</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-kt">char</span><span class="tok-p">)</span> <span class="tok-n">waitKey</span><span class="tok-p">(</span><span class="tok-mi">10</span><span class="tok-p">);</span>
   					<span class="tok-k">if</span><span class="tok-p">(</span><span class="tok-n">key</span> <span class="tok-o">==</span> <span class="tok-sc">&#39;m&#39;</span> <span class="tok-o">||</span> <span class="tok-n">key</span> <span class="tok-o">==</span> <span class="tok-sc">&#39;g&#39;</span> <span class="tok-o">||</span> <span class="tok-n">key</span> <span class="tok-o">==</span> <span class="tok-sc">&#39;v&#39;</span> <span class="tok-o">||</span> <span class="tok-n">key</span> <span class="tok-o">==</span> <span class="tok-sc">&#39;l&#39;</span> <span class="tok-o">||</span> <span class="tok-n">key</span> <span class="tok-o">==</span> <span class="tok-sc">&#39;j&#39;</span><span class="tok-p">)</span> <span class="tok-k">break</span><span class="tok-p">;</span>
@@ -720,6 +729,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   					<span class="tok-n">frameFiltered</span><span class="tok-p">.</span><span class="tok-n">convertTo</span><span class="tok-p">(</span><span class="tok-n">result</span><span class="tok-p">,</span> <span class="tok-n">CV_8U</span><span class="tok-p">);</span>
   					<span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Original&quot;</span><span class="tok-p">,</span> <span class="tok-n">frame</span><span class="tok-p">);</span>
   					<span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Filtro&quot;</span><span class="tok-p">,</span> <span class="tok-n">result</span><span class="tok-p">);</span>
+
+  					<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;filtro_vertical_entrada.png&quot;</span><span class="tok-p">,</span><span class="tok-n">frame</span><span class="tok-p">);</span>
+  					<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;filtro_vertical_saida.png&quot;</span><span class="tok-p">,</span><span class="tok-n">result</span><span class="tok-p">);</span>
 
   					<span class="tok-c1">//Leitura do teclado</span>
   					<span class="tok-n">key</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-kt">char</span><span class="tok-p">)</span> <span class="tok-n">waitKey</span><span class="tok-p">(</span><span class="tok-mi">10</span><span class="tok-p">);</span>
@@ -753,6 +765,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   					<span class="tok-c1">//result = result + abs(min);</span>
   					<span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Original&quot;</span><span class="tok-p">,</span> <span class="tok-n">frame</span><span class="tok-p">);</span>
   					<span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Filtro&quot;</span><span class="tok-p">,</span> <span class="tok-n">result</span><span class="tok-p">);</span>
+
+  					<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;filtro_laplaciano_entrada.png&quot;</span><span class="tok-p">,</span><span class="tok-n">frame</span><span class="tok-p">);</span>
+  					<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;filtro_laplaciano_saida.png&quot;</span><span class="tok-p">,</span><span class="tok-n">result</span><span class="tok-p">);</span>
 
   					<span class="tok-c1">//Leitura do teclado</span>
   					<span class="tok-n">key</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-kt">char</span><span class="tok-p">)</span> <span class="tok-n">waitKey</span><span class="tok-p">(</span><span class="tok-mi">10</span><span class="tok-p">);</span>
@@ -792,6 +807,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   					<span class="tok-c1">//result = result + abs(min);</span>
   					<span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Original&quot;</span><span class="tok-p">,</span> <span class="tok-n">frame</span><span class="tok-p">);</span>
   					<span class="tok-n">imshow</span><span class="tok-p">(</span><span class="tok-s">&quot;Filtro&quot;</span><span class="tok-p">,</span> <span class="tok-n">result</span><span class="tok-p">);</span>
+
+  					<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;filtro_lapl_gaussiano_entrada.png&quot;</span><span class="tok-p">,</span><span class="tok-n">frame</span><span class="tok-p">);</span>
+  					<span class="tok-n">imwrite</span><span class="tok-p">(</span><span class="tok-s">&quot;filtro_lapl_gaussiano_saida.png&quot;</span><span class="tok-p">,</span><span class="tok-n">result</span><span class="tok-p">);</span>
 
   					<span class="tok-c1">//Leitura do teclado</span>
   					<span class="tok-n">key</span> <span class="tok-o">=</span> <span class="tok-p">(</span><span class="tok-kt">char</span><span class="tok-p">)</span> <span class="tok-n">waitKey</span><span class="tok-p">(</span><span class="tok-mi">10</span><span class="tok-p">);</span>
@@ -850,41 +868,51 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Podemos ver o resultado da aplicação dos filtros a seguir:</p>
 </div>
-<div class="imageblock">
+<div class="openblock float-group">
 <div class="content">
-<img src="./gaussiano.png" alt="320" width="320">
-</div>
-<div class="title">Figura 1. Filtro Gaussiano</div>
-</div>
-<div class="imageblock">
+<div class="imageblock center">
 <div class="content">
-<img src="./media.png" alt="320" width="320">
+<img src="./filtro_media_entrada.png" alt="450" width="450">
 </div>
-<div class="title">Figura 2. Filtro da média</div>
+<div class="title">Figura 1. Entrada dos filtros.</div>
 </div>
-<div class="imageblock">
+<div class="imageblock center">
 <div class="content">
-<img src="./horizontal.png" alt="320" width="320">
+<img src="./filtro_media_saida.png" alt="450" width="450">
 </div>
-<div class="title">Figura 3. Filtro Borda Horizontal</div>
+<div class="title">Figura 2. Saída do filtro da média.</div>
 </div>
-<div class="imageblock">
+<div class="imageblock center">
 <div class="content">
-<img src="./vertical.png" alt="320" width="320">
+<img src="./filtro_gaussiano_saida.png" alt="450" width="450">
 </div>
-<div class="title">Figura 4. Filtro Borda Vertical</div>
+<div class="title">Figura 3. Saída do filtro Gaussiano.</div>
 </div>
-<div class="imageblock">
+<div class="imageblock center">
 <div class="content">
-<img src="./laplaciano.png" alt="320" width="320">
+<img src="./filtro_vertical_saida.png" alt="450" width="450">
 </div>
-<div class="title">Figura 5. Filtro Laplaciano</div>
+<div class="title">Figura 4. Saída do filtro de borda vertical.</div>
 </div>
-<div class="imageblock">
+<div class="imageblock center">
 <div class="content">
-<img src="./gaussiano.png" alt="320" width="320">
+<img src="./filtro_horizontal_saida.png" alt="450" width="450">
 </div>
-<div class="title">Figura 6. Filtro Laplaciano do Gaussiano</div>
+<div class="title">Figura 5. Saída do filtro de borda horizontal.</div>
+</div>
+<div class="imageblock center">
+<div class="content">
+<img src="./filtro_laplaciano_saida.png" alt="450" width="450">
+</div>
+<div class="title">Figura 6. Saída do filtro laplaciano.</div>
+</div>
+<div class="imageblock center">
+<div class="content">
+<img src="./filtro_media_saida.png" alt="450" width="450">
+</div>
+<div class="title">Figura 7. Saída do filtro laplaciano do gaussiano.</div>
+</div>
+</div>
 </div>
 <div class="paragraph">
 <p>Podemos então observar que cada filtro destaca diferentes características de uma imagem, desde realizar a suavização de uma imagem até detectar bordas que ocorram na mesma. Para o caso onde é aplicado um filtro após o outro (Laplaciano do Gaussiano, por exemplo), vê-se que as característica de ambos os filtros se mantém. Isso pode ser útil para diversas aplicações, onde podemos combinar características de filtros para obter um resultado desejado.</p>
@@ -898,7 +926,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-09-14 17:38:54 BRT
+Last updated 2017-09-19 12:00:02 BRT
 </div>
 </div>
 </body>
