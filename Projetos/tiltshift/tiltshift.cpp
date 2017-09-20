@@ -5,111 +5,140 @@
 using namespace cv;
 using namespace std;
 
-double alfa, beta;
-int alfa_slider = 0;                //valor inicial do borramento
-int alfa_slider_max = 100;  //valor final do borramento
+//Variáveis da interface
+int   d_slider 		= 6;        	//valor inicial do borramento
+float d_slider_max 	= 100;			//valor final do borramento
 
-int position_slider = 50;          //valor inicial da posição. Por default, centralizado. 
-int position_slider_max = 100; //valor final da posição
+int   position_slider 	  = 50;		//valor inicial da posição. Por default, centralizado. 
+float position_slider_max = 100; 	//valor final da posição
 
-int height_slider = 0;        //valor inicial da altura da imagem nítida
-int height_slider_max = 100;    //valor final da altura da imagem nítida
+int   height_slider 	= 50;       //valor inicial da altura da imagem nítida
+float height_slider_max = 100;    	//valor final da altura da imagem nítida - Tem q ser float
 
-char TrackbarName[50];
-
-Mat degrade;
-
-//void multiply(image, image2, saida, double scale=1, int dtype=-1 )
-
-//void addWeighted(src1, alfa, src2, beta, 0, dst, -1);
+//Variáveis da função
+int l1, l2;							//Localização da borda superior e inferior da transição nitido-borrado
+float d, centro, altura;
+unsigned char R,G,B;
 
 
+Mat image;							//Imagem original
+Mat image32F;						//Imagem original em ponto flutuante
+Mat result;							//Imagem borrada
+//Mat borrada;						//Imagem borrada em ponto flutuante
+//Mat degrade;						//Imagem com o comportamento da função a ser aplicada na imagem original
+//Mat degrade_negativo;				//Imagem com o comportamento da função a ser aplicada na imagem borrada
+Mat resultado;						//Resultado da aplicação do degrade sobre a imagem original
+Mat resultado2;						//Resultado da aplicação do degrade negativo sobre a imagem borrada 
+Mat final;							//Soma da imagem original + imagem borrada com seus repectivos pesos
 
-/* Essa parte é para borrar a imagem*/
-int main (){
-    Mat image, image32F, result;
-      //quer por ela como variavel da main ou global?
-    Vec3b valor_degrade;
-    unsigned char R,G,B;
 
-    Mat mask(3,3, CV_32F), mask1;
 
+
+void atualiza_tanh(int, void*){
+	
+    Mat degrade(image.rows,image.cols,CV_8UC3);							//Imagem com o comportamento da função a ser aplicada na imagem original
+    Mat degrade_negativo(image.rows,image.cols,CV_8UC3);				//Imagem com o comportamento da função a ser aplicada na imagem borrada
+
+	altura = (float)(height_slider/height_slider_max)*image.rows/2;		//Varia de 0 até image.rows/2
+    l1 = -altura;														//Altura da borda de transição nítido-borrado superior
+    l2 =  altura;														//Altura da borda de transição nítido-borrado inferior
+    d  =  (float)d_slider + 1;											//Intensidade da mudança
+   	centro = (float)(position_slider/position_slider_max)*image.rows;   //0-> Nítido no topo; .5 -> Nítido no centro; 1 -> Nítido na base da imagem
+    
+    //Criação das imagens com degrade (vai ser aplicado na imagem original)    
+   	//Degrade para imagem original
+    for(int i = 0; i < image.rows; i++){
+        for(int j = 0; j < image.cols; j++){
+            R = 255*0.5*(tanh(((i-centro)-l1)/(d))-tanh(((i-centro)-l2)/(d)));
+            G = 255*0.5*(tanh(((i-centro)-l1)/(d))-tanh(((i-centro)-l2)/(d)));
+            B = 255*0.5*(tanh(((i-centro)-l1)/(d))-tanh(((i-centro)-l2)/(d)));
+            degrade.at<Vec3b>(i,j)= (Vec3b){B,G,R};
+        }
+    }
+    //Degrade para imagem borrada
+    for(int i = 0; i < image.rows; i++){
+    	for(int j = 0; j < image.cols; j++){
+            degrade_negativo.at<Vec3b>(i,j)= (Vec3b){255,255,255} - degrade.at<Vec3b>(i,j);
+        }
+    }
+ 
+    
+    multiply(image, degrade, resultado, 1/255.0, -1);				//Aplicação do degrade na imagem original
+    multiply(result, degrade_negativo, resultado2, 1/255.0, -1);	//Aplicação do degrade_negativo na imagem borrada
+    
+    final = resultado + resultado2;									//Obtenção da 
+
+    imshow("Resultado", final);
+}
+
+void borraImagem(Mat imagem, int numero_borramentos){
+	//Criação da máscara
+	Mat mask(3,3, CV_32F), mask1;
     float media[] = { 1, 1, 1,
-                                      1, 1, 1,
-                                        1, 1, 1 };
+                      1, 1, 1,
+                      1, 1, 1 };
     mask = Mat(3, 3, CV_32F, media);
     scaleAdd(mask, 1/9.0, Mat::zeros(3, 3, CV_32F), mask1);
     swap(mask, mask1);
 
-    image = imread("aew.png",CV_LOAD_IMAGE_COLOR);
-    Mat borrada(image.rows,image.cols,CV_32F);
-    Mat degrade(image.rows,image.cols,CV_8UC3);
-    Mat degrade_negativo(image.rows,image.cols,CV_8UC3);
+    //Conversão para ponto flutuante
+    imagem.convertTo(image32F, CV_32F);
     
-    imshow("aew", image);
-    waitKey();
-
-    image.convertTo(image32F, CV_32F);
-
-
-    for(int i=0; i<20; i++){
-        filter2D(image32F, borrada, CV_32F, mask, Point(1,1), 0);
+    //Borramento
+    Mat borrada(imagem.rows,imagem.cols,CV_32F);
+    for(int i=0; i<numero_borramentos; i++){
+    	filter2D(image32F, borrada, CV_32F, mask, Point(1,1), 0);
         image32F=borrada;
     }
-
     borrada.convertTo(result, CV_8U);
-    imshow("aew", result);
-    waitKey();
-    // Nesse momento temso: image -> imagem original; result -> imagem borrada
 
+}
+
+void saturaImagem(Mat imagem, float fator){
+
+	cvtColor(imagem,imagem,CV_BGR2HSV);
+
+    for(int i = 0; i< imagem.rows; i++){
+    	for(int j = 0; j<imagem.cols; j++){
+    		if(imagem.at<Vec3b>(i,j)[1]*fator >= 255)
+     			imagem.at<Vec3b>(i,j)[1] = 255;
+     		else
+     			imagem.at<Vec3b>(i,j)[1] = imagem.at<Vec3b>(i,j)[1]*fator;
+     	}
+     }
+
+    cvtColor(imagem,imagem,CV_HSV2BGR);
+}
+
+int main (){
     
-    int l1, l2, d, centro, altura;
-    altura = image.rows/4;
-    l1 = -altura;
-    l2 =  altura;
-    d  =   6;
-    centro = image.rows/2;    //entrada da interface (0-100%)*image.rows (na interface, por padrão é 50%)
+
+    image = imread("aew.png",CV_LOAD_IMAGE_COLOR);
     
-    //Criação das imagens com degrade (vai ser aplicado na imagem original)    
-    for(int i = 0; i < image.rows; i++){
-        for(int j = 0; j < image.cols; j++){
-            R = (unsigned char) 255*0.5*(tanh(((i-centro)-l1)/(d))-tanh(((i-centro)-l2)/(d)));
-            G = (unsigned char) 255*0.5*(tanh(((i-centro)-l1)/(d))-tanh(((i-centro)-l2)/(d)));
-            B = (unsigned char) 255*0.5*(tanh(((i-centro)-l1)/(d))-tanh(((i-centro)-l2)/(d)));
-            valor_degrade = (Vec3b){B,G,R};
-            degrade.at<Vec3b>(i,j)= valor_degrade;
-        }
-    }
+
+    namedWindow("Original",CV_WINDOW_KEEPRATIO);
+    imshow("Original", image);
+        
+    saturaImagem(image,1.7);
+
+    borraImagem(image,20);
+
+  	namedWindow("Resultado",CV_WINDOW_KEEPRATIO);    
     
-    imshow("degrade", degrade);
-    waitKey();
-    
-    //Criação do degrade negativo (vai ser aplicado na imagem borrada)
-    for(int i = 0; i < image.rows; i++){
-        for(int j = 0; j < image.cols; j++){
-            degrade_negativo.at<Vec3b>(i,j)= (Vec3b){255,255,255} - degrade.at<Vec3b>(i,j);
-        }
-    }
-    imshow("degrade", degrade_negativo);
-    waitKey();
-    
-    Mat resultado, resultado2, final;
-    
-    multiply(image, degrade, resultado, 1/255.0, -1);
-    multiply(result, degrade_negativo, resultado2, 1/255.0, -1);
-    
-  
-    final = resultado + resultado2;
-   
-  
-    imshow("Resultado", final);
-    waitKey();
-    
-    
-    
-    
+    createTrackbar("Altura ","Resultado",&height_slider,height_slider_max,atualiza_tanh);
+    atualiza_tanh(height_slider,0);
+
+    createTrackbar("Posicao","Resultado",&position_slider,position_slider_max,atualiza_tanh);
+    atualiza_tanh(position_slider,0);
+
+    createTrackbar("Borda  ","Resultado",&d_slider,d_slider_max,atualiza_tanh);
+    atualiza_tanh(d_slider,0);
+
+
+
+
+    waitKey(0);
     
     
     return 0;
 }
-
