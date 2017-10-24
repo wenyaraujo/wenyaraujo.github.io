@@ -113,7 +113,7 @@ void saturaImagem(Mat imagem, float fator){
 int main (){
     
 
-    image = imread("aew.png",CV_LOAD_IMAGE_COLOR);
+    image = imread("nature.jpg",CV_LOAD_IMAGE_COLOR);
     
 
     namedWindow("Original",CV_WINDOW_KEEPRATIO);

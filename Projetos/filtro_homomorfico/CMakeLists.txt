@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+project( dft )
+set(OpenCV_DIR "/usr/local/share/OpenCV")
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+add_executable( dft dft.cpp )
+target_link_libraries( dft ${OpenCV_LIBS} )

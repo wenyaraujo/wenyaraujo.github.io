@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+project( tiltshift )
+set(OpenCV_DIR "/usr/local/opencv/share/OpenCV")
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+add_executable( tiltshift tiltshift.cpp )
+target_link_libraries( tiltshift ${OpenCV_LIBS} )

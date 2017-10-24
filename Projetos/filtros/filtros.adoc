@@ -65,7 +65,7 @@ image::./filtro_laplaciano_saida.png[450,450]
 
 [.center]
 .Saída do filtro laplaciano do gaussiano.
-image::./filtro_media_saida.png[450,450]
+image::./filtro_lapl_gaussiano_saida.png[450,450]
 --
 
 
