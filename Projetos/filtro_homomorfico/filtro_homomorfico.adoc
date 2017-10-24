@@ -6,7 +6,7 @@
 :toc-title: Sumário
 [.text-justify]
 
-= 6ª Atividade: Filtragem Espacial
+= 8ª Atividade: Filtro Homomórfico
 
 == Introdução
 
@@ -18,10 +18,6 @@ Do qual, o "i" (iluminância) representa as variações espaciais lentas, ditas 
 A iluminância representa a quantidade de luz incidente sobre a imagem/pixel. Já a reflectância demonstra quanto dessa luz é refletida e depende da superficie pela qual a luz incide.
 
 O filtro homomórfico promete corrigir a má iluminação da cena. Para que isso seja bem articulado, devemos atuar separadamente nas componentes de iluminância e reflectância, para que possamos atenuar as frequencias baixas (i) e manter as frequências altas (r).
-
-== Desenvolvimento da atividade
-
-Em Desenvolvimento...
 
 
 === Código no OpenCV
