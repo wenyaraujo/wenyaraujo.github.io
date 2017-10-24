@@ -32,3 +32,5 @@ Aperfeiçoamos um algoritmo mostrado pelo professor para que este acrescente o c
 === 7ª Atividade: link:tiltshift/tiltshift.html[Tilt-Shift]
 
 É possível simular miniaturas com imagens e filmes em tamanho real. Esta técnica é chamada de Tilt-Shift.
+
+=== 8ª Atividade: link:filtro_homomorfico/fitro_homomorfico.html[Filtro Homomórfico]
