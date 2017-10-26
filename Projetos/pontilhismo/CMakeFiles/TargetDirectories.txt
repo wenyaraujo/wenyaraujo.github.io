@@ -1,0 +1,3 @@
+/home/felipe/Dropbox/2-Processamento Digital de Imagens/pontilhismo/CMakeFiles/rebuild_cache.dir
+/home/felipe/Dropbox/2-Processamento Digital de Imagens/pontilhismo/CMakeFiles/edit_cache.dir
+/home/felipe/Dropbox/2-Processamento Digital de Imagens/pontilhismo/CMakeFiles/pontilhismo.dir
